@@ -4,6 +4,7 @@ export default function HomePage(){
     return(
         <Wrapper>
             <h1>HomePage</h1>
+
         </Wrapper>
     )
 }
