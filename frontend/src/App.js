@@ -6,25 +6,27 @@ import NewDepotPage from "./pages/NewDepotPage";
 import EditDepotPage from "./pages/EditDepotPage";
 import PlayPage from "./pages/PlayPage";
 import HomePage from "./pages/HomePage";
+import useStocks from "./hooks/useStocks";
 
 function App() {
-    return (
+    const {stocks} = useStocks()
+     return (
         <div>
             <Router>
-            <Header/>
-            <NavigationBar/>
+                <Header/>
+                <NavigationBar/>
                 <Switch>
                     <Route path="/new">
-                        <NewDepotPage />
+                        <NewDepotPage/>
                     </Route>
                     <Route path="/edit">
-                        <EditDepotPage />
+                        <EditDepotPage/>
                     </Route>
                     <Route path="/play">
-                        <PlayPage />
+                        <PlayPage/>
                     </Route>
                     <Route path="/">
-                        <HomePage />
+                        {stocks && <HomePage stocks={stocks}/>}
                     </Route>
                 </Switch>
             </Router>

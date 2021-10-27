@@ -1,6 +1,8 @@
 package de.neufische.mydepot.api;
 
 import de.neufische.mydepot.model.PortfolioItem;
+import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
@@ -12,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Log4j2
 @Service
 public class PortfolioApiService {
 
@@ -19,10 +22,9 @@ public class PortfolioApiService {
         Map<String, Stock> stocks = new HashMap<>();
         String[] symbols = getSymbolsForUpdate(all);
         try {
-            stocks = YahooFinance.get(symbols); // single request
+            stocks = YahooFinance.get(symbols); // single request, MIT-Lizenz
         } catch (IOException e) {
-            System.err.println("Error in PortfolioApiService: updateAll");
-            e.printStackTrace();
+            log.error("Error in PortfolioApiService: updateAll", e);
         }
         return mapStocksToPortfolioItem(stocks, all);
     }
