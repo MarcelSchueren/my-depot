@@ -7,7 +7,7 @@ export default function useStocks() {
 
         useEffect(() => {
             getStocks()
-                .then(stocks => setStocks(stocks))
+                .then(result => setStocks(result))
                 .catch(error => console.error(error.message))
         }, [])
 

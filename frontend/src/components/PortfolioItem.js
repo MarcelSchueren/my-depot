@@ -17,4 +17,3 @@ const Wrapper = styled.div`
   padding: 12px;
   margin: 12px;
 `
-
