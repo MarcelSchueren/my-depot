@@ -5,7 +5,7 @@ export default function PortfolioItem({stock}) {
         <Wrapper>
             <h3>{stock.displayName}</h3>
             <h4>{stock.quantity} pcs. á {stock.regularMarketPrice} </h4>
-            <h4> = {stock.quantity * stock.regularMarketPrice}</h4>
+            <h4> = {(stock.quantity * stock.regularMarketPrice).toFixed(2)}</h4>
         </Wrapper>
     )
 }
