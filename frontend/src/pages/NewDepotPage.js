@@ -1,14 +1,10 @@
-import styled from "styled-components/macro";
+import {Typography} from "@mui/material";
 
 export default function NewDepotPage(){
     return(
-        <Wrapper>
-            <h1>NewDepotPage</h1>
-        </Wrapper>
+        <div>
+            <Typography variant="h3">NewDepotPage</Typography>
+        </div>
     )
 }
 
-const Wrapper = styled.div`
-  text-align: center;
-  background-color: green;
-`

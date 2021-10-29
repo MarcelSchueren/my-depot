@@ -1,19 +1,19 @@
-import styled from "styled-components/macro";
+import {Button, Card, CardActions, Typography} from "@mui/material";
+import CardContent from '@mui/material/CardContent';
 
 export default function PortfolioItem({stock}) {
+
     return (
-        <Wrapper>
-            <h3>{stock.displayName}</h3>
-            <h4>{stock.quantity} pcs. á {stock.regularMarketPrice} </h4>
-            <h4> = {(stock.quantity * stock.regularMarketPrice).toFixed(2)}</h4>
-        </Wrapper>
+        <Card variant="outlined" align="center">
+            <CardContent>
+                <Typography variant="h4">{stock.displayName}</Typography>
+                <Typography variant="h5">{stock.quantity} pcs. á {(stock.regularMarketPrice).toFixed(2)} $ </Typography>
+                <Typography variant="h5"> = {(stock.quantity * stock.regularMarketPrice).toFixed(2)} $ </Typography>
+            </CardContent>
+            <CardActions>
+                <Button size="small">More</Button>
+            </CardActions>
+        </Card>
     )
 }
 
-const Wrapper = styled.div`
-  border: 3px solid darkblue;
-  background-color: ghostwhite;
-  border-radius: 12px;
-  padding: 12px;
-  margin: 12px;
-`

@@ -1,20 +1,16 @@
-import styled from "styled-components/macro";
+import {Typography} from "@mui/material";
 import PortfolioItem from "../components/PortfolioItem";
 
 export default function HomePage({stocks}) {
 
     return (
-        <Wrapper>
-            <h1>HomePage</h1>
+        <div>
+            <Typography variant="h3">HomePage</Typography>
             {stocks.map(stock => {
                 return <PortfolioItem stock={stock} key={stock.id}/>
             })}
-        </Wrapper>
+        </div>
     )
 }
 
-const Wrapper = styled.div`
-  text-align: center;
-  background-color: yellow;
-`
 

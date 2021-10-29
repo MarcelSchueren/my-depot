@@ -8,12 +8,14 @@ import PlayPage from "./pages/PlayPage";
 import HomePage from "./pages/HomePage";
 import useStocks from "./hooks/useStocks";
 import SwitchDepotPage from "./pages/SwitchDepotPage";
+import {CssBaseline} from "@mui/material";
 
 function App() {
     const {stocks} = useStocks()
     return (
         <div>
             <Router>
+                <CssBaseline/>
                 <Header/>
                 <NavigationBar/>
                 <Switch>

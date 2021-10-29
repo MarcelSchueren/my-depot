@@ -1,14 +1,17 @@
-import styled from 'styled-components/macro'
+import {AppBar,  Toolbar, Typography} from "@mui/material";
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 
-export default function Header(){
+export default function Header() {
     return (
-        <HeaderStyled>
-            <h1>my-depot</h1>
-        </HeaderStyled>
+        <header>
+            <meta name="viewport" content="initial-scale=1, width=device-width"/>
+            <AppBar position="relative">
+                <Toolbar>
+                    <AccountBalanceIcon fontSize="large"/>
+                    <Typography variant="h4">My Depot</Typography>
+                </Toolbar>
+            </AppBar>
+        </header>
     )
 }
 
-const HeaderStyled = styled.header`
-  text-align: center;
-  background-color: aqua;
-`
