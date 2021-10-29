@@ -7,6 +7,7 @@ export default function NavigationBar(){
             <NavLink to="/" exact>Home</NavLink>
             <NavLink to="/new">New Depot</NavLink>
             <NavLink to="/edit">Edit Depot</NavLink>
+            <NavLink to="/switch">Switch Depot</NavLink>
             <NavLink to="/play">Play</NavLink>
         </Wrapper>
     )

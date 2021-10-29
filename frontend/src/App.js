@@ -7,10 +7,11 @@ import EditDepotPage from "./pages/EditDepotPage";
 import PlayPage from "./pages/PlayPage";
 import HomePage from "./pages/HomePage";
 import useStocks from "./hooks/useStocks";
+import SwitchDepotPage from "./pages/SwitchDepotPage";
 
 function App() {
     const {stocks} = useStocks()
-     return (
+    return (
         <div>
             <Router>
                 <Header/>
@@ -21,6 +22,9 @@ function App() {
                     </Route>
                     <Route path="/edit">
                         <EditDepotPage/>
+                    </Route>
+                    <Route path="/switch">
+                        <SwitchDepotPage/>
                     </Route>
                     <Route path="/play">
                         <PlayPage/>
