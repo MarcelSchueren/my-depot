@@ -1,14 +1,10 @@
-import styled from "styled-components/macro";
+import {Typography} from "@mui/material";
+
 
 export default function PlayPage(){
     return(
-        <Wrapper>
-            <h1>PlayPage</h1>
-        </Wrapper>
+        <div>
+            <Typography variant="h3">PlayPage</Typography>
+        </div>
     )
 }
-
-const Wrapper = styled.div`
-  text-align: center;
-  background-color: red;
-`
