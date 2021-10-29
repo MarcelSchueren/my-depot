@@ -17,7 +17,6 @@ function App() {
             <Router>
                 <CssBaseline/>
                 <Header/>
-                <NavigationBar/>
                 <Switch>
                     <Route path="/new">
                         <NewDepotPage/>
@@ -35,6 +34,7 @@ function App() {
                         {stocks && <HomePage stocks={stocks}/>}
                     </Route>
                 </Switch>
+                <NavigationBar/>
             </Router>
         </div>
     );
