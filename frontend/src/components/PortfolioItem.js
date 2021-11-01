@@ -10,7 +10,7 @@ export default function PortfolioItem({stock}) {
                 <Typography variant="h5">{stock.quantity} pcs. á {(stock.regularMarketPrice).toFixed(2)} $ </Typography>
                 <Typography variant="h5"> = {(stock.quantity * stock.regularMarketPrice).toFixed(2)} $ </Typography>
             </CardContent>
-            <CardActions>
+            <CardActions style={{justifyContent: 'center'}}>
                 <Button size="small">More</Button>
             </CardActions>
         </Card>
