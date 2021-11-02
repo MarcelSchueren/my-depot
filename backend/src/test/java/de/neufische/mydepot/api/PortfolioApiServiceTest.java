@@ -26,9 +26,6 @@ class PortfolioApiServiceTest {
     @Autowired
     private PortfolioApiService portfolioApiService;
 
-    @MockBean
-    private Stock stock1;
-
     @Test
     @DisplayName("Should update a given portfolio with one item")
     void updateAll() {
@@ -46,16 +43,15 @@ class PortfolioApiServiceTest {
         List<PortfolioItem> all = List.of(amazon);
 
         String[] symbols = {"AMZN"};
-        stock1 = new Stock("AMZN");
+        Stock stock1 = new Stock("AMZN");
         StockQuote stockQuote = new StockQuote("AMZN");
         stock1.setQuote(stockQuote);
 
         Map<String, Stock> stocks = new HashMap<>(Map.of("AMZN", stock1));
 
         when(yahooFinanceService.get(symbols)).thenReturn(stocks);
-
-        when(stock1.getQuote().getChangeInPercent()).thenReturn(BigDecimal.valueOf(10));
-        when(stock1.getQuote().getPrice()).thenReturn(BigDecimal.valueOf(550));
+        when(yahooFinanceService.getRegularMarketPrice(stocks, amazon)).thenReturn(BigDecimal.valueOf(550));
+        when(yahooFinanceService.getRegularMarketChangePercent(stocks, amazon)).thenReturn(BigDecimal.valueOf(10));
 
         PortfolioItem amazonUpdated = new PortfolioItem(
                 "1"

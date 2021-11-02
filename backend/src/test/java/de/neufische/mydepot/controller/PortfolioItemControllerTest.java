@@ -95,7 +95,7 @@ class PortfolioItemControllerTest {
         //WHEN (INCLUDES AN UPDATE OF STATS (PRICE & CHANGEPERCENT))
         ResponseEntity<PortfolioItem[]> response = restTemplate.getForEntity("/stocks", PortfolioItem[].class);
 
-        //UPDATE STATS SO ITEMS CAN MATCH
+        //UPDATE STATS FROM ITEM IN MEMORY SO IT CAN MATCH WITH ALREADY UPDATED ITEM FROM DB
         newPortfolioItem1.setRegularMarketChangePercent(Objects.requireNonNull(response.getBody())[0].getRegularMarketChangePercent());
         newPortfolioItem1.setRegularMarketPrice(Objects.requireNonNull(response.getBody())[0].getRegularMarketPrice());
         newPortfolioItem2.setRegularMarketChangePercent(Objects.requireNonNull(response.getBody())[1].getRegularMarketChangePercent());

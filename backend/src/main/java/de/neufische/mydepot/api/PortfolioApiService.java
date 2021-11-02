@@ -4,12 +4,10 @@ import de.neufische.mydepot.model.PortfolioItem;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import yahoofinance.Stock;
-import yahoofinance.YahooFinance;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -32,8 +30,8 @@ public class PortfolioApiService {
 
     private List<PortfolioItem> mapStocksToPortfolioItem(Map<String, Stock> stocks, List<PortfolioItem> all) {
         for (PortfolioItem portfolioItem : all) {
-            BigDecimal regularMarketPrice = stocks.get(portfolioItem.getSymbol()).getQuote().getPrice();
-            BigDecimal regularMarketChangePercent = stocks.get(portfolioItem.getSymbol()).getQuote().getChangeInPercent();
+            BigDecimal regularMarketPrice = yahooFinanceService.getRegularMarketPrice(stocks, portfolioItem);
+            BigDecimal regularMarketChangePercent = yahooFinanceService.getRegularMarketChangePercent(stocks, portfolioItem);
             portfolioItem.setRegularMarketPrice(regularMarketPrice);
             portfolioItem.setRegularMarketChangePercent(regularMarketChangePercent);
         }
