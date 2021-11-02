@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class PortfolioItemService {
@@ -36,8 +37,9 @@ public class PortfolioItemService {
     }
 
     public PortfolioItem getPortfolioItemById(String id) {
-        if (portfolioItemRepo.findById(id).isPresent()) {
-            return portfolioItemRepo.findById(id).get();
+        Optional<PortfolioItem> maybeExistingItem = portfolioItemRepo.findById(id);
+        if (maybeExistingItem.isPresent()) {
+            return maybeExistingItem.get();
         } else {
             throw new NoSuchElementException("PortfolioItem with id " + id + "not found!");
         }

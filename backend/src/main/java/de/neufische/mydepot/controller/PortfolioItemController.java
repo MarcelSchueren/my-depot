@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/stocks")
 public class PortfolioItemController {
 
     private final PortfolioItemService portfolioItemService;
@@ -23,7 +23,7 @@ public class PortfolioItemController {
         return portfolioItemService.getPortfolioItems();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public PortfolioItem getPortfolioItem(@PathVariable String id) {
         return portfolioItemService.getPortfolioItemById(id);
     }
