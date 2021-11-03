@@ -37,7 +37,7 @@ export default function NavigationBar() {
                 />
                 <BottomNavigationAction
                     label="Open Depot"
-                    value="/switch"
+                    value="/open"
                     icon={<FolderIcon/>}/>
 
                 <BottomNavigationAction

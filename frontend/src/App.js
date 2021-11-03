@@ -7,8 +7,8 @@ import EditDepotPage from "./pages/EditDepotPage";
 import PlayPage from "./pages/PlayPage";
 import HomePage from "./pages/HomePage";
 import useStocks from "./hooks/useStocks";
-import SwitchDepotPage from "./pages/SwitchDepotPage";
 import {CssBaseline} from "@mui/material";
+import OpenDepotPage from "./pages/OpenDepotPage";
 
 function App() {
     const {stocks} = useStocks()
@@ -24,8 +24,8 @@ function App() {
                     <Route path="/edit">
                         <EditDepotPage/>
                     </Route>
-                    <Route path="/switch">
-                        <SwitchDepotPage/>
+                    <Route path="/open">
+                        <OpenDepotPage/>
                     </Route>
                     <Route path="/play">
                         <PlayPage/>
