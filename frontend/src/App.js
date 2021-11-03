@@ -6,12 +6,17 @@ import NewDepotPage from "./pages/NewDepotPage";
 import EditDepotPage from "./pages/EditDepotPage";
 import PlayPage from "./pages/PlayPage";
 import HomePage from "./pages/HomePage";
-import useStocks from "./hooks/useStocks";
+import useDepots from "./hooks/useDepots";
 import {CssBaseline} from "@mui/material";
 import OpenDepotPage from "./pages/OpenDepotPage";
+import {useState} from "react";
 
 function App() {
-    const {stocks} = useStocks()
+    const {depots} = useDepots()
+    const [activeDepot, setActiveDepot] = useState()
+
+    const openDepot = (depot)=>setActiveDepot(depot)
+
     return (
         <div>
             <Router>
@@ -25,13 +30,13 @@ function App() {
                         <EditDepotPage/>
                     </Route>
                     <Route path="/open">
-                        <OpenDepotPage/>
+                        {depots && <OpenDepotPage depots={depots} openDepot={openDepot}/>}
                     </Route>
                     <Route path="/play">
                         <PlayPage/>
                     </Route>
                     <Route path="/">
-                        {stocks && <HomePage stocks={stocks}/>}
+                        {activeDepot && <HomePage activeDepot={activeDepot}/>}
                     </Route>
                 </Switch>
                 <NavigationBar/>

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-export const getStocks = () => {
-    return axios.get('/stocks')
+export const getDepots = () => {
+    return axios.get('/portfolios')
         .then(response => response.data)
 }
 
