@@ -23,7 +23,11 @@ public class PortfolioService {
     }
 
     public List<Portfolio> getPortfolios() {
-        return portfolioRepo.findAll();
+        List<Portfolio> all = portfolioRepo.findAll();
+        for (Portfolio p : all){
+            p.setPortfolioItems(portfolioApiService.updateAll(p.getPortfolioItems()));
+        }
+        return all;
     }
 
     public Portfolio createPortfolio(Portfolio newPortfolio) {
