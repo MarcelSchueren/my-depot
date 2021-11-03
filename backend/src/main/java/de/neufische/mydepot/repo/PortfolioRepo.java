@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface PortfolioRepo extends PagingAndSortingRepository<Portfolio, String> {
-    List<Portfolio> getAllDepots();
+    List<Portfolio> findAll();
 }

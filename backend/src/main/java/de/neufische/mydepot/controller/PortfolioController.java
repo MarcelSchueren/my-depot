@@ -1,7 +1,6 @@
 package de.neufische.mydepot.controller;
 
 import de.neufische.mydepot.model.Portfolio;
-import de.neufische.mydepot.model.PortfolioItem;
 import de.neufische.mydepot.service.PortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
