@@ -3,6 +3,10 @@ import PortfolioItem from "../components/PortfolioItem";
 
 export default function HomePage({activeDepot}) {
 
+    if (!activeDepot) {
+        return <div> Please chose an active depot </div>
+    }
+
     return (
         <div>
             <Typography variant="h3">HomePage</Typography>

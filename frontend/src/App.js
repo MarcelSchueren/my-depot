@@ -43,13 +43,13 @@ function App() {
                             <EditDepotPage/>
                         </Route>
                         <Route path="/open">
-                            {depots && <OpenDepotPage depots={depots} openDepot={openDepot}/>}
+                            <OpenDepotPage depots={depots} openDepot={openDepot}/>
                         </Route>
                         <Route path="/play">
                             <PlayPage/>
                         </Route>
                         <Route path="/">
-                            {activeDepot && <HomePage activeDepot={activeDepot}/>}
+                            <HomePage activeDepot={activeDepot}/>
                         </Route>
                     </Switch>
                     <NavigationBar/>

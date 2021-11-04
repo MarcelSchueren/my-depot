@@ -10,7 +10,7 @@ import {useState} from "react";
 export default function NavigationBar() {
 
     const [value, setValue] = useState('');
-    let history = useHistory();
+    const history = useHistory();
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

@@ -55,7 +55,7 @@ class PortfolioControllerTest {
                 .build();
 
         //WHEN
-        ResponseEntity<Portfolio> postResponse = restTemplate.postForEntity("/portfolios", newPortfolio, Portfolio.class);
+        ResponseEntity<Portfolio> postResponse = restTemplate.postForEntity("/portfolio", newPortfolio, Portfolio.class);
         Portfolio actual = postResponse.getBody();
         //THEN
         assertEquals(HttpStatus.OK, postResponse.getStatusCode());
@@ -82,13 +82,13 @@ class PortfolioControllerTest {
                 .portfolioItems(List.of(newPortfolioItem))
                 .build();
 
-        ResponseEntity<Portfolio> postResponse = restTemplate.postForEntity("/portfolios", newPortfolio, Portfolio.class);
+        ResponseEntity<Portfolio> postResponse = restTemplate.postForEntity("/portfolio", newPortfolio, Portfolio.class);
         Portfolio actual = postResponse.getBody();
         assert actual != null;
         String actualId = actual.getId();
 
         //WHEN
-        ResponseEntity<Portfolio> getResponse = restTemplate.getForEntity("/portfolios/" + actualId, Portfolio.class);
+        ResponseEntity<Portfolio> getResponse = restTemplate.getForEntity("/portfolio/" + actualId, Portfolio.class);
         Portfolio persistedPortfolio = getResponse.getBody();
 
         //THEN
@@ -137,7 +137,7 @@ class PortfolioControllerTest {
         portfolioRepo.save(portfolio2);
 
         //WHEN
-        ResponseEntity<Portfolio[]> response = restTemplate.getForEntity("/portfolios", Portfolio[].class);
+        ResponseEntity<Portfolio[]> response = restTemplate.getForEntity("/portfolio", Portfolio[].class);
         Portfolio[] expected = new Portfolio[]{portfolio1, portfolio2};
         //need to update expected Portfolio:
         for (Portfolio portfolio : expected) {

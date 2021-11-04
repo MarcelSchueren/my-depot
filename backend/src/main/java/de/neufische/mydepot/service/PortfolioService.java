@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class PortfolioService {
@@ -24,7 +23,7 @@ public class PortfolioService {
 
     public List<Portfolio> getPortfolios() {
         List<Portfolio> all = portfolioRepo.findAll();
-        for (Portfolio p : all){
+        for (Portfolio p : all) {
             p.setPortfolioItems(portfolioApiService.updateAll(p.getPortfolioItems()));
         }
         return all;
@@ -35,13 +34,9 @@ public class PortfolioService {
     }
 
     public Portfolio getPortfolioById(String id) {
-        Optional<Portfolio> maybePortfolio = portfolioRepo.findById(id);
-        if (maybePortfolio.isEmpty()) {
-            throw new NoSuchElementException("Portfolio with id " + id + "not found!");
-        } else {
-            Portfolio portfolioToUpdate =  maybePortfolio.get();
-            portfolioToUpdate.setPortfolioItems(portfolioApiService.updateAll(portfolioToUpdate.getPortfolioItems()));
-            return portfolioToUpdate;
-        }
+        Portfolio portfolio = portfolioRepo.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Portfolio with id " + id + "not found!"));
+        portfolio.setPortfolioItems(portfolioApiService.updateAll(portfolio.getPortfolioItems()));
+        return portfolio;
     }
 }
