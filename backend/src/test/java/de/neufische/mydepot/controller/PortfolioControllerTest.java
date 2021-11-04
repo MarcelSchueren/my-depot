@@ -1,5 +1,6 @@
 package de.neufische.mydepot.controller;
 
+import de.neufische.mydepot.api.PortfolioApiService;
 import de.neufische.mydepot.model.Portfolio;
 import de.neufische.mydepot.model.PortfolioItem;
 import de.neufische.mydepot.repo.PortfolioRepo;
@@ -24,6 +25,9 @@ class PortfolioControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
+    @Autowired
+    private PortfolioApiService portfolioApiService;
 
     @Autowired
     private PortfolioRepo portfolioRepo;
@@ -92,10 +96,10 @@ class PortfolioControllerTest {
         assertEquals(persistedPortfolio.getId(), actualId);
         assertEquals(newPortfolio.getName(), persistedPortfolio.getName());
 
-        assertEquals(newPortfolio.getPortfolioItems().get(0).getDisplayName(), persistedPortfolio.getPortfolioItems().get(0).getDisplayName() );
-        assertEquals(newPortfolio.getPortfolioItems().get(0).getBoughtAtPricePerShare(), persistedPortfolio.getPortfolioItems().get(0).getBoughtAtPricePerShare() );
-        assertNotEquals(newPortfolio.getPortfolioItems().get(0).getRegularMarketChangePercent(), persistedPortfolio.getPortfolioItems().get(0).getRegularMarketChangePercent() );
-        assertNotEquals(newPortfolio.getPortfolioItems().get(0).getRegularMarketPrice(), persistedPortfolio.getPortfolioItems().get(0).getRegularMarketPrice() );
+        assertEquals(newPortfolio.getPortfolioItems().get(0).getDisplayName(), persistedPortfolio.getPortfolioItems().get(0).getDisplayName());
+        assertEquals(newPortfolio.getPortfolioItems().get(0).getBoughtAtPricePerShare(), persistedPortfolio.getPortfolioItems().get(0).getBoughtAtPricePerShare());
+        assertNotEquals(newPortfolio.getPortfolioItems().get(0).getRegularMarketChangePercent(), persistedPortfolio.getPortfolioItems().get(0).getRegularMarketChangePercent());
+        assertNotEquals(newPortfolio.getPortfolioItems().get(0).getRegularMarketPrice(), persistedPortfolio.getPortfolioItems().get(0).getRegularMarketPrice());
     }
 
 
@@ -134,7 +138,11 @@ class PortfolioControllerTest {
 
         //WHEN
         ResponseEntity<Portfolio[]> response = restTemplate.getForEntity("/portfolios", Portfolio[].class);
-        Portfolio [] expected = new Portfolio[]{portfolio1, portfolio2};
+        Portfolio[] expected = new Portfolio[]{portfolio1, portfolio2};
+        //need to update expected Portfolio:
+        for (Portfolio portfolio : expected) {
+            portfolio.setPortfolioItems(portfolioApiService.updateAll(portfolio.getPortfolioItems()));
+        }
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));

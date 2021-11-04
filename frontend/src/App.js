@@ -7,7 +7,7 @@ import EditDepotPage from "./pages/EditDepotPage";
 import PlayPage from "./pages/PlayPage";
 import HomePage from "./pages/HomePage";
 import useDepots from "./hooks/useDepots";
-import {CssBaseline} from "@mui/material";
+import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
 import OpenDepotPage from "./pages/OpenDepotPage";
 import {useState} from "react";
 
@@ -17,8 +17,21 @@ function App() {
 
     const openDepot = (depot)=>setActiveDepot(depot)
 
+    const themeDark = createTheme({
+        palette: {
+            type: 'dark',
+            primary: {
+                main: '#3f51b5',
+            },
+            secondary: {
+                main: '#f50057',
+            },
+        },
+    })
+
     return (
         <div>
+            <ThemeProvider theme={themeDark}>
             <Router>
                 <CssBaseline/>
                 <Header/>
@@ -41,7 +54,8 @@ function App() {
                 </Switch>
                 <NavigationBar/>
             </Router>
-        </div>
+            </ThemeProvider>
+            </div>
     );
 }
 
