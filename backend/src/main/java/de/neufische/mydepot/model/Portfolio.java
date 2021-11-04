@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Portfolio {
-    String id;
-    String name;
-    List<PortfolioItem> portfolioItems;
+    private String id;
+    private String name;
+    private List<PortfolioItem> portfolioItems;
 }

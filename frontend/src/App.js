@@ -15,7 +15,7 @@ function App() {
     const {depots} = useDepots()
     const [activeDepot, setActiveDepot] = useState()
 
-    const openDepot = (depot)=>setActiveDepot(depot)
+    const openDepot = (depot) => setActiveDepot(depot)
 
     const themeDark = createTheme({
         palette: {
@@ -31,31 +31,31 @@ function App() {
 
     return (
         <div>
+            <CssBaseline/>
             <ThemeProvider theme={themeDark}>
-            <Router>
-                <CssBaseline/>
-                <Header/>
-                <Switch>
-                    <Route path="/new">
-                        <NewDepotPage/>
-                    </Route>
-                    <Route path="/edit">
-                        <EditDepotPage/>
-                    </Route>
-                    <Route path="/open">
-                        {depots && <OpenDepotPage depots={depots} openDepot={openDepot}/>}
-                    </Route>
-                    <Route path="/play">
-                        <PlayPage/>
-                    </Route>
-                    <Route path="/">
-                        {activeDepot && <HomePage activeDepot={activeDepot}/>}
-                    </Route>
-                </Switch>
-                <NavigationBar/>
-            </Router>
+                <Router>
+                    <Header/>
+                    <Switch>
+                        <Route path="/new">
+                            <NewDepotPage/>
+                        </Route>
+                        <Route path="/edit">
+                            <EditDepotPage/>
+                        </Route>
+                        <Route path="/open">
+                            {depots && <OpenDepotPage depots={depots} openDepot={openDepot}/>}
+                        </Route>
+                        <Route path="/play">
+                            <PlayPage/>
+                        </Route>
+                        <Route path="/">
+                            {activeDepot && <HomePage activeDepot={activeDepot}/>}
+                        </Route>
+                    </Switch>
+                    <NavigationBar/>
+                </Router>
             </ThemeProvider>
-            </div>
+        </div>
     );
 }
 

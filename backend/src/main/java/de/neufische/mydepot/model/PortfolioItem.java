@@ -12,11 +12,11 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 
 public class PortfolioItem {
-    String id;                                      //von DB
-    String displayName;                             //von Frontend/DB
-    String symbol;                                  //von Frontend/DB
-    double quantity;                                //von Frontend/DB
-    double boughtAtPricePerShare;                   //von Frontend/DB
-    BigDecimal regularMarketPrice;                  //aus API
-    BigDecimal regularMarketChangePercent;          //aus API
+    private String id;                                      //von DB
+    private String displayName;                             //von Frontend/DB
+    private String symbol;                                  //von Frontend/DB
+    private double quantity;                                //von Frontend/DB
+    private double boughtAtPricePerShare;                   //von Frontend/DB
+    private BigDecimal regularMarketPrice;                  //aus API
+    private BigDecimal regularMarketChangePercent;          //aus API
 }
