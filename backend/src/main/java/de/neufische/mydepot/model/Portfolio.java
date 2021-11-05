@@ -17,4 +17,6 @@ public class Portfolio {
     private String name;
     private List<PortfolioItem> portfolioItems;
     private BigDecimal valueOfPortfolio;
+    private double purchaseCostsOfPortfolio;
+    private double arithmeticalGain;
 }

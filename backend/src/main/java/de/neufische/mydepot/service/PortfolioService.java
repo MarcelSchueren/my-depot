@@ -28,8 +28,18 @@ public class PortfolioService {
         for (Portfolio p : all) {
             p.setPortfolioItems(portfolioApiService.updateAll(p.getPortfolioItems()));
             p.setValueOfPortfolio(BigDecimal.valueOf(calculateValueOfPortfolio(p)));
+            p.setPurchaseCostsOfPortfolio(calculatePurchaseCostsOfPortfolio(p));
+            p.setArithmeticalGain(p.getValueOfPortfolio().doubleValue() - p.getPurchaseCostsOfPortfolio());
         }
         return all;
+    }
+
+    private double calculatePurchaseCostsOfPortfolio(Portfolio p) {
+        double result = 0;
+        for (PortfolioItem portfolioItem : p.getPortfolioItems()) {
+            result += portfolioItem.getBoughtAtPricePerShare() * portfolioItem.getQuantity();
+        }
+        return result;
     }
 
     private double calculateValueOfPortfolio(Portfolio p) {

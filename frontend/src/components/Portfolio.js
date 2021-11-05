@@ -18,7 +18,7 @@ export default function Portfolio({depot, openDepot}) {
             <CardContent>
                 <Typography variant="h4">{depot.name}</Typography>
                 <Typography variant="h5">{depot.valueOfPortfolio.toFixed(2)} $ </Typography>
-            </CardContent>
+                   </CardContent>
             <CardActions style={{justifyContent: 'center'}}>
                 <Button size="small" onClick={handleClick}>Open</Button>
             </CardActions>

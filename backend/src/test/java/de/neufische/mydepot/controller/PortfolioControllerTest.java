@@ -60,7 +60,7 @@ class PortfolioControllerTest {
         //THEN
         assertEquals(HttpStatus.OK, postResponse.getStatusCode());
         assertNotNull(actual);
-        assertEquals(new Portfolio(actual.getId(), "TestPortfolio", List.of(newPortfolioItem), BigDecimal.valueOf(0)), actual);
+        assertEquals(new Portfolio(actual.getId(), "TestPortfolio", List.of(newPortfolioItem), BigDecimal.valueOf(0), 0, 0), actual);
     }
 
     @Test
