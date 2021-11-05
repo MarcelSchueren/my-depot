@@ -1,10 +1,13 @@
 import {Button, Card, CardActions, Typography} from "@mui/material";
 import CardContent from '@mui/material/CardContent';
+import useStyles from "../hooks/useStyles";
 
 export default function PortfolioItem({stock}) {
 
+    const classes = useStyles()
+
     return (
-        <Card variant="outlined">
+        <Card className={classes.card}>
             <CardContent>
                 <Typography variant="h4" align="left">{stock.displayName}</Typography>
                 <Typography variant="h5">{stock.quantity} pcs. á {(stock.regularMarketPrice).toFixed(2)} $ </Typography>

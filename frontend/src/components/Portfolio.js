@@ -1,10 +1,12 @@
 import {Button, Card, CardActions, Typography} from "@mui/material";
 import CardContent from '@mui/material/CardContent';
 import {useHistory} from "react-router-dom";
+import useStyles from "../hooks/useStyles";
 
 export default function Portfolio({depot, openDepot}) {
 
-    let history = useHistory()
+    const classes = useStyles()
+    const history = useHistory()
 
     const handleClick=()=>{
         openDepot(depot)
@@ -12,7 +14,7 @@ export default function Portfolio({depot, openDepot}) {
     }
 
     return (
-        <Card variant="outlined" align="center">
+        <Card className={classes.card}>
             <CardContent>
                 <Typography variant="h4">{depot.name}</Typography>
             </CardContent>
