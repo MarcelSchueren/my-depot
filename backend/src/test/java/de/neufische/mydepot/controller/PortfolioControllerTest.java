@@ -52,6 +52,9 @@ class PortfolioControllerTest {
         Portfolio newPortfolio = Portfolio.builder()
                 .name("TestPortfolio")
                 .portfolioItems(List.of(newPortfolioItem))
+                .purchaseCostsOfPortfolio(0)
+                .arithmeticalGain(0)
+                .valueOfPortfolio(BigDecimal.valueOf(0))
                 .build();
 
         //WHEN
