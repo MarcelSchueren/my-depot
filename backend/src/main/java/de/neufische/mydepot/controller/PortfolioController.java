@@ -32,5 +32,4 @@ public class PortfolioController {
     public Portfolio createPortfolio(@RequestBody Portfolio newPortfolio) {
         return portfolioService.createPortfolio(newPortfolio);
     }
-
 }

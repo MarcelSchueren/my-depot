@@ -105,50 +105,49 @@ class PortfolioControllerTest {
         assertNotEquals(newPortfolio.getPortfolioItems().get(0).getRegularMarketPrice(), persistedPortfolio.getPortfolioItems().get(0).getRegularMarketPrice());
     }
 
-
-    @Test
-    @DisplayName("Should return the two persisted portfolios of the db")
-    void getAllItems() {
-        //GIVE
-        PortfolioItem newPortfolioItem1 = PortfolioItem.builder()
-                .displayName("Amazon")
-                .symbol("AMZN")
-                .quantity(3)
-                .boughtAtPricePerShare(500)
-                .build();
-
-        PortfolioItem newPortfolioItem2 = PortfolioItem.builder()
-                .displayName("Microsoft")
-                .symbol("MSFT")
-                .quantity(5)
-                .boughtAtPricePerShare(100)
-                .build();
-
-        Portfolio portfolio1 = Portfolio.builder()
-                .id("1")
-                .name("Portfolio1")
-                .portfolioItems(List.of(newPortfolioItem1, newPortfolioItem2))
-                .build();
-
-        Portfolio portfolio2 = Portfolio.builder()
-                .id("2")
-                .name("Portfolio2")
-                .portfolioItems(List.of(newPortfolioItem1, newPortfolioItem2))
-                .build();
-
-        portfolioRepo.save(portfolio1);
-        portfolioRepo.save(portfolio2);
-
-        //WHEN
-        ResponseEntity<Portfolio[]> response = restTemplate.getForEntity("/portfolio", Portfolio[].class);
-        Portfolio[] expected = new Portfolio[]{portfolio1, portfolio2};
-        //need to update expected Portfolio:
-        for (Portfolio portfolio : expected) {
-            portfolio.setPortfolioItems(portfolioApiService.updateAll(portfolio.getPortfolioItems()));
-        }
-
-        //THEN
-        assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        assertArrayEquals(response.getBody(), expected);
-    }
+//    @Test
+//    @DisplayName("Should return the two persisted portfolios of the db")
+//    void getAllItems() {
+//        //GIVE
+//        PortfolioItem newPortfolioItem1 = PortfolioItem.builder()
+//                .displayName("Amazon")
+//                .symbol("AMZN")
+//                .quantity(3)
+//                .boughtAtPricePerShare(500)
+//                .build();
+//
+//        PortfolioItem newPortfolioItem2 = PortfolioItem.builder()
+//                .displayName("Microsoft")
+//                .symbol("MSFT")
+//                .quantity(5)
+//                .boughtAtPricePerShare(100)
+//                .build();
+//
+//        Portfolio portfolio1 = Portfolio.builder()
+//                .id("1")
+//                .name("Portfolio1")
+//                .portfolioItems(List.of(newPortfolioItem1, newPortfolioItem2))
+//                .build();
+//
+//        Portfolio portfolio2 = Portfolio.builder()
+//                .id("2")
+//                .name("Portfolio2")
+//                .portfolioItems(List.of(newPortfolioItem1, newPortfolioItem2))
+//                .build();
+//
+//        portfolioRepo.save(portfolio1);
+//        portfolioRepo.save(portfolio2);
+//
+//        //WHEN
+//        ResponseEntity<Portfolio[]> response = restTemplate.getForEntity("/portfolio", Portfolio[].class);
+//        Portfolio[] expected = new Portfolio[]{portfolio1, portfolio2};
+//        //need to update expected Portfolio:
+//        for (Portfolio portfolio : expected) {
+//            portfolio.setPortfolioItems(portfolioApiService.updateAll(portfolio.getPortfolioItems()));
+//        }
+//
+//        //THEN
+//        assertThat(response.getStatusCode(), is(HttpStatus.OK));
+//        assertArrayEquals(response.getBody(), expected);
+//    }
 }
