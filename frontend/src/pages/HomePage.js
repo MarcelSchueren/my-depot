@@ -11,8 +11,9 @@ export default function HomePage({activeDepot}) {
     }
 
     return (
-        <div>
-            <Typography variant="h3" gutterBottom>HomePage</Typography>
+        <div className={classes.page}>
+            <Typography variant="h4" gutterBottom>{activeDepot.name}</Typography>
+            <Typography variant="h5" gutterBottom>{activeDepot.valueOfPortfolio.toFixed(2)} $ </Typography>
             <Container className={classes.cardGrid} >
                 <Grid container spacing={2}>
                     {activeDepot.portfolioItems.map(stock => {

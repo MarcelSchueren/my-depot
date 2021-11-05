@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -15,4 +16,5 @@ public class Portfolio {
     private String id;
     private String name;
     private List<PortfolioItem> portfolioItems;
+    private BigDecimal valueOfPortfolio;
 }

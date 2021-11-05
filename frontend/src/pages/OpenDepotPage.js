@@ -11,8 +11,8 @@ export default function OpenDepotPage({depots, openDepot}) {
     }
 
     return (
-        <div>
-            <Typography variant="h3" gutterBottom>OpenDepotPage</Typography>
+        <div className={classes.page}>
+            <Typography variant="h4" gutterBottom>Chose a depot:</Typography>
             <Container className={classes.cardGrid}>
                 <Grid container spacing={2}>
                     {depots.map(depot => {

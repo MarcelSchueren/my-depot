@@ -2,10 +2,12 @@ package de.neufische.mydepot.service;
 
 import de.neufische.mydepot.api.PortfolioApiService;
 import de.neufische.mydepot.model.Portfolio;
+import de.neufische.mydepot.model.PortfolioItem;
 import de.neufische.mydepot.repo.PortfolioRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -25,8 +27,17 @@ public class PortfolioService {
         List<Portfolio> all = portfolioRepo.findAll();
         for (Portfolio p : all) {
             p.setPortfolioItems(portfolioApiService.updateAll(p.getPortfolioItems()));
+            p.setValueOfPortfolio(BigDecimal.valueOf(calculateValueOfPortfolio(p)));
         }
         return all;
+    }
+
+    private double calculateValueOfPortfolio(Portfolio p) {
+        double valueOfPortfolio = 0;
+        for (PortfolioItem portfolioItem : p.getPortfolioItems()) {
+            valueOfPortfolio += portfolioItem.getRegularMarketPrice().doubleValue() * portfolioItem.getQuantity();
+        }
+        return valueOfPortfolio;
     }
 
     public Portfolio createPortfolio(Portfolio newPortfolio) {
