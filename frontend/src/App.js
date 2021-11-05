@@ -10,16 +10,18 @@ import useDepots from "./hooks/useDepots";
 import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
 import OpenDepotPage from "./pages/OpenDepotPage";
 import {useState} from "react";
+import Footer from "./components/Footer";
 
 function App() {
+
     const {depots} = useDepots()
     const [activeDepot, setActiveDepot] = useState()
 
     const openDepot = (depot) => setActiveDepot(depot)
 
-    const themeDark = createTheme({
+    const theme = createTheme({
         palette: {
-            type: 'dark',
+            type: 'standard',
             primary: {
                 main: '#3f51b5',
             },
@@ -32,7 +34,7 @@ function App() {
     return (
         <div>
             <CssBaseline/>
-            <ThemeProvider theme={themeDark}>
+            <ThemeProvider theme={theme}>
                 <Router>
                     <Header/>
                     <Switch>
@@ -52,6 +54,7 @@ function App() {
                             <HomePage activeDepot={activeDepot}/>
                         </Route>
                     </Switch>
+                    <Footer/>
                     <NavigationBar/>
                 </Router>
             </ThemeProvider>
