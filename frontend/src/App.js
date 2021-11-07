@@ -6,36 +6,58 @@ import NewDepotPage from "./pages/NewDepotPage";
 import EditDepotPage from "./pages/EditDepotPage";
 import PlayPage from "./pages/PlayPage";
 import HomePage from "./pages/HomePage";
-import useStocks from "./hooks/useStocks";
-import SwitchDepotPage from "./pages/SwitchDepotPage";
-import {CssBaseline} from "@mui/material";
+import useDepots from "./hooks/useDepots";
+import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
+import OpenDepotPage from "./pages/OpenDepotPage";
+import {useState} from "react";
+import Footer from "./components/Footer";
 
 function App() {
-    const {stocks} = useStocks()
+
+    const {depots} = useDepots()
+    const [activeDepot, setActiveDepot] = useState()
+
+    const openDepot = (depot) => setActiveDepot(depot)
+
+    const theme = createTheme({
+        palette: {
+            type: 'standard',
+            primary: {
+                main: '#3f51b5',
+            },
+            secondary: {
+                main: '#f50057',
+            },
+        },
+    })
+
     return (
         <div>
-            <Router>
-                <CssBaseline/>
-                <Header/>
-                <Switch>
-                    <Route path="/new">
-                        <NewDepotPage/>
-                    </Route>
-                    <Route path="/edit">
-                        <EditDepotPage/>
-                    </Route>
-                    <Route path="/switch">
-                        <SwitchDepotPage/>
-                    </Route>
-                    <Route path="/play">
-                        <PlayPage/>
-                    </Route>
-                    <Route path="/">
-                        {stocks && <HomePage stocks={stocks}/>}
-                    </Route>
-                </Switch>
-                <NavigationBar/>
-            </Router>
+            <CssBaseline/>
+            <ThemeProvider theme={theme}>
+                <Router>
+                    <Header/>
+                    <Switch>
+                        <Route path="/new">
+                            <NewDepotPage/>
+                        </Route>
+                        <Route path="/edit">
+                            <EditDepotPage/>
+                        </Route>
+                        <Route path="/open">
+                            <OpenDepotPage depots={depots} openDepot={openDepot}/>
+                        </Route>
+                        <Route path="/play">
+                            <PlayPage/>
+                        </Route>
+                        <Route path="/">
+                            <HomePage activeDepot={activeDepot}/>
+                        </Route>
+                    </Switch>
+                    <Footer/>
+                    <NavigationBar/>
+                </Router>
+            </ThemeProvider>
         </div>
     );
 }

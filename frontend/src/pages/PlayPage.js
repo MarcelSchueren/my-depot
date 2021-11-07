@@ -1,9 +1,13 @@
 import {Typography} from "@mui/material";
+import useStyles from "../hooks/useStyles";
 
 export default function PlayPage(){
+
+    const classes= useStyles()
+
     return(
-        <div>
-            <Typography variant="h3">PlayPage</Typography>
+        <div className={classes.page}>
+            <Typography variant="h3" gutterBottom>PlayPage</Typography>
             <Typography variant="h5">Feature coming soon :)</Typography>
         </div>
     )

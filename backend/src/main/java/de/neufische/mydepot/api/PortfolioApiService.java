@@ -21,26 +21,26 @@ public class PortfolioApiService {
         this.yahooFinanceService = yahooFinanceService;
     }
 
-    public List<PortfolioItem> updateAll(List<PortfolioItem> all) {
+    public List<PortfolioItem> updateAll(List<PortfolioItem> allItems) {
         Map<String, Stock> stocks;
-        String[] symbols = getSymbolsForUpdate(all);
+        String[] symbols = getSymbolsForUpdate(allItems);
         stocks = yahooFinanceService.get(symbols); // single request, MIT-Lizenz
-        return mapStocksToPortfolioItem(stocks, all);
+        return mapStocksToPortfolioItem(stocks, allItems);
     }
 
-    private List<PortfolioItem> mapStocksToPortfolioItem(Map<String, Stock> stocks, List<PortfolioItem> all) {
-        for (PortfolioItem portfolioItem : all) {
+    private List<PortfolioItem> mapStocksToPortfolioItem(Map<String, Stock> stocks, List<PortfolioItem> allItems) {
+        for (PortfolioItem portfolioItem : allItems) {
             BigDecimal regularMarketPrice = yahooFinanceService.getRegularMarketPrice(stocks, portfolioItem);
             BigDecimal regularMarketChangePercent = yahooFinanceService.getRegularMarketChangePercent(stocks, portfolioItem);
             portfolioItem.setRegularMarketPrice(regularMarketPrice);
             portfolioItem.setRegularMarketChangePercent(regularMarketChangePercent);
         }
-        return all;
+        return allItems;
     }
 
-    private String[] getSymbolsForUpdate(List<PortfolioItem> all) {
+    private String[] getSymbolsForUpdate(List<PortfolioItem> allItems) {
         List<String> symbols = new ArrayList<>();
-        for (PortfolioItem portfolioItem : all) {
+        for (PortfolioItem portfolioItem : allItems) {
             symbols.add(portfolioItem.getSymbol());
         }
         return symbols.toArray(new String[0]);

@@ -10,7 +10,7 @@ import {useState} from "react";
 export default function NavigationBar() {
 
     const [value, setValue] = useState('');
-    let history = useHistory();
+    const history = useHistory();
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -37,7 +37,7 @@ export default function NavigationBar() {
                 />
                 <BottomNavigationAction
                     label="Open Depot"
-                    value="/switch"
+                    value="/open"
                     icon={<FolderIcon/>}/>
 
                 <BottomNavigationAction
