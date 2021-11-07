@@ -1,0 +1,28 @@
+package de.neufische.mydepot.api;
+
+import de.neufische.mydepot.model.PortfolioItem;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import yahoofinance.Stock;
+
+@Log4j2
+@Service
+public class PortfolioItemApiService {
+
+    private final YahooFinanceService yahooFinanceService;
+
+    @Autowired
+    public PortfolioItemApiService(YahooFinanceService yahooFinanceService) {
+        this.yahooFinanceService = yahooFinanceService;
+    }
+
+    public PortfolioItem getPortfolioItemBySymbol(String symbol) {
+        Stock portfolioItemBySymbol = yahooFinanceService.getPortfolioItemBySymbol(symbol);
+        return PortfolioItem.builder()
+                .symbol(symbol)
+                .displayName(yahooFinanceService.getDisplayName(portfolioItemBySymbol))
+                .regularMarketPrice(yahooFinanceService.getRegularMarketPrice(portfolioItemBySymbol))
+                .build();
+    }
+}

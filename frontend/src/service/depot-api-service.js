@@ -5,4 +5,9 @@ export const getDepots = () => {
         .then(response => response.data)
 }
 
+export const getPortfolioItem = (symbol) => {
+    return axios.get(`/portfolioItem/${symbol}`)
+        .then(response => response.data)
+}
+
 

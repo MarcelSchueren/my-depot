@@ -19,9 +19,18 @@ public class YahooFinanceService {
         try {
             return YahooFinance.get(symbols);
         } catch (IOException e) {
-            log.error("Error in YahooFinanceService: updateAll", e);
+            log.error("Error in YahooFinanceService: get", e);
         }
         return Collections.emptyMap();
+    }
+
+    public Stock getPortfolioItemBySymbol(String symbol)  {
+        try {
+            return YahooFinance.get(symbol);
+        } catch (IOException e) {
+            log.error("Error in YahooFinanceService: getPortfolioItemBySymbol", e);
+        }
+        return null;
     }
 
     public BigDecimal getRegularMarketPrice(Map<String, Stock> stocks, PortfolioItem portfolioItem) {
@@ -30,5 +39,13 @@ public class YahooFinanceService {
 
     public BigDecimal getRegularMarketChangePercent(Map<String, Stock> stocks, PortfolioItem portfolioItem) {
           return stocks.get(portfolioItem.getSymbol()).getQuote().getChangeInPercent();
+    }
+
+    public BigDecimal getRegularMarketPrice(Stock stock){
+        return stock.getQuote().getPrice();
+    }
+
+    public String getDisplayName(Stock stock) {
+        return stock.getName();
     }
 }
