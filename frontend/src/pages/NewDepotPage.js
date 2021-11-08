@@ -8,7 +8,7 @@ import PortfolioItem from "../components/PortfolioItem";
 export default function NewDepotPage() {
 
     const [portfolioName, setPortfolioName] = useState()
-    const [symbol, setSymbol] = useState()
+    const [symbol, setSymbol] = useState("")
     const [activePortfolioItem, setActivePortfolioItem] = useState()
     const [portfolioItems, setPortfolioItems] = useState([])
 
