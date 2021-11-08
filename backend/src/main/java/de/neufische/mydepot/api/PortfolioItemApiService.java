@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import yahoofinance.Stock;
 
+import java.util.UUID;
+
 @Log4j2
 @Service
 public class PortfolioItemApiService {
@@ -20,9 +22,14 @@ public class PortfolioItemApiService {
     public PortfolioItem getPortfolioItemBySymbol(String symbol) {
         Stock portfolioItemBySymbol = yahooFinanceService.getPortfolioItemBySymbol(symbol);
         return PortfolioItem.builder()
+                .id(generateUUID())
                 .symbol(symbol)
                 .displayName(yahooFinanceService.getDisplayName(portfolioItemBySymbol))
                 .regularMarketPrice(yahooFinanceService.getRegularMarketPrice(portfolioItemBySymbol))
                 .build();
+    }
+
+    private String generateUUID() {
+        return UUID.randomUUID().toString();
     }
 }

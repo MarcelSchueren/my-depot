@@ -17,7 +17,7 @@ export default function OpenDepotPage({depots, openDepot}) {
                 <Grid container spacing={2}>
                     {depots.map(depot => {
                         return (
-                            <Grid item key={depot.displayName} xs={12} sm={6} md={4}>
+                            <Grid item key={depot.name} xs={12} sm={6} md={4}>
                                 <Portfolio depot={depot} key={depot.id} openDepot={openDepot}/>
                             </Grid>
                         )
