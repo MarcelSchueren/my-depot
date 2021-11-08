@@ -37,7 +37,6 @@ export default function NewDepotPage() {
 
     const saveDepot = () => {
         const newDepot = {
-            "id": "",
             "name": portfolioName,
             "portfolioItems": portfolioItems,
             "valueOfPortfolio": "0",

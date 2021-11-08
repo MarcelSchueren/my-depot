@@ -16,6 +16,6 @@ public class PortfolioItemService {
     }
 
     public PortfolioItem getPortfolioItemBySymbol(String symbol) {
-        return portfolioItemApiService.getPortfolioItemBySymbol(symbol);
+        return portfolioItemApiService.getPortfolioItemBySymbol(symbol.toUpperCase());
     }
 }
