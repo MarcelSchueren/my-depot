@@ -10,4 +10,9 @@ export const getPortfolioItem = (symbol) => {
         .then(response => response.data)
 }
 
+export const addPortfolio = (newPortfolio) => {
+    return axios.post('/portfolio', newPortfolio)
+        .then(response => response.data)
+}
+
 
