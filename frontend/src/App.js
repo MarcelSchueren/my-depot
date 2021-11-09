@@ -14,10 +14,11 @@ import Footer from "./components/Footer";
 
 function App() {
 
-    const {depots} = useDepots()
+    const {depots, addDepot} = useDepots()
     const [activeDepot, setActiveDepot] = useState()
 
     const openDepot = (depot) => setActiveDepot(depot)
+
 
     const theme = createTheme({
         palette: {
@@ -38,8 +39,8 @@ function App() {
                 <Router>
                     <Header/>
                     <Switch>
-                        <Route path="/new">
-                            <NewDepotPage/>
+                        <Route path="/new" >
+                            <NewDepotPage addDepot={addDepot}/>
                         </Route>
                         <Route path="/edit">
                             <EditDepotPage/>

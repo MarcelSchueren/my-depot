@@ -17,14 +17,13 @@ export default function AddPortfolioItem({
 
     const addPortfolioItem = event => {
         event.preventDefault()
-        console.log(quantityPortfolioItem)
-        if (!quantityPortfolioItem) {
+        if (quantityPortfolioItem <= 0) {
             return
         }
         activePortfolioItem.quantity = quantityPortfolioItem
         activePortfolioItem.boughtAtPricePerShare = activePortfolioItem.regularMarketPrice
         setPortfolioItems([...portfolioItems, activePortfolioItem])
-        // setQuantityPortfolioItem('')
+        setQuantityPortfolioItem(0)
         clearActivePortfolioItem()
     }
 
@@ -40,6 +39,7 @@ export default function AddPortfolioItem({
                     shrink: true,
                 }}
                 variant="filled"
+                InputProps={{ inputProps: { min: 1 } }}
                 // value={quantityPortfolioItem}
                 onChange={event => setQuantityPortfolioItem(event.target.value)}
             />
