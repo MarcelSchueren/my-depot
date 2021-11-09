@@ -5,6 +5,7 @@ import {addPortfolio, getPortfolioItem} from "../service/depot-api-service";
 import AddPortfolioItem from "../components/AddPortfolioItem";
 import PortfolioItem from "../components/PortfolioItem";
 import {useHistory} from "react-router-dom";
+import useDepots from "../hooks/useDepots";
 
 export default function NewDepotPage({openDepot, addDepot}) {
 
@@ -13,6 +14,7 @@ export default function NewDepotPage({openDepot, addDepot}) {
     const [activePortfolioItem, setActivePortfolioItem] = useState()
     const [portfolioItems, setPortfolioItems] = useState([])
     const history = useHistory()
+    const {update} = useDepots()
 
     const classes = useStyles()
 
@@ -29,14 +31,6 @@ export default function NewDepotPage({openDepot, addDepot}) {
         getPortfolioItem(symbol).then(portfolioItem => setActivePortfolioItem(portfolioItem))
     }
 
-    // const calculatePurchaseCostsOfPortfolio = () => {
-    //     let costs = 0;
-    //     portfolioItems.map(portfolioItem => {
-    //         costs+= portfolioItem.boughtAtPricePerShare
-    //     })
-    //     return costs
-    // }
-
     const saveDepot = () => {
         if (portfolioName === '' || portfolioName === undefined) {
             return;
@@ -48,21 +42,22 @@ export default function NewDepotPage({openDepot, addDepot}) {
             "purchaseCostsOfPortfolio": 0,
             "arithmeticalGain": 0,
         }
-        addPortfolio(newDepot).then(r => addDepot(r)).then(history.push('/open'))
-        //+ then history push
-        //+ clear site
+
+        //stattdessen besser backend gesamtDepots neu abrufen? -> ja
+        addPortfolio(newDepot).then(responseDepot => addDepot(responseDepot)).then(update).then(history.push('/open'))
+       //  addPortfolio(newDepot).then(update).then(history.push('/open'))
     }
 
     return (
         <div className={classes.page}>
             <Typography variant="h4" gutterBottom>Create a new depot:</Typography>
             <TextField id="depotName" label="Name your new Depot" variant="outlined" autoComplete='off'
-                       InputProps={{disableUnderline: true}} margin="normal"
+                       margin="normal"
                        onChange={event => setPortfolioName(event.target.value)}/>
             <form onSubmit={handleSymbolSubmit}>
                 <Typography variant="h5">Add a stock:</Typography>
                 <TextField id="stockName" label="Enter symbol" variant="outlined" value={symbol} autoComplete='off'
-                           InputProps={{disableUnderline: true}} margin="normal"
+                           margin="normal"
                            onChange={event => setSymbol(event.target.value)}/>
             </form>
             <AddPortfolioItem

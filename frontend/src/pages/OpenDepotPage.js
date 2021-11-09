@@ -1,10 +1,12 @@
 import {Container, Grid, Typography} from "@mui/material";
 import Portfolio from "../components/Portfolio";
 import useStyles from "../hooks/useStyles";
+import useDepots from "../hooks/useDepots";
 
-export default function OpenDepotPage({depots, openDepot}) {
+export default function OpenDepotPage({openDepot}) {
 
     const classes = useStyles();
+    const {depots} = useDepots()
 
     if (!depots) {
         return <div> No active depots! Create one with "new"</div>
