@@ -7,7 +7,7 @@ import PortfolioItem from "../components/PortfolioItem";
 import {useHistory} from "react-router-dom";
 import useDepots from "../hooks/useDepots";
 
-export default function NewDepotPage({openDepot, addDepot}) {
+export default function NewDepotPage({addDepot}) {
 
     const [portfolioName, setPortfolioName] = useState()
     const [symbol, setSymbol] = useState("")
@@ -28,7 +28,7 @@ export default function NewDepotPage({openDepot, addDepot}) {
         if (!symbol) {
             return <div>Couldn't find item with symbol: {symbol}</div>
         }
-        getPortfolioItem(symbol).then(portfolioItem => setActivePortfolioItem(portfolioItem))
+        getPortfolioItem(symbol).catch(error => console.error(error.message)).then(portfolioItem => setActivePortfolioItem(portfolioItem))
     }
 
     const saveDepot = () => {
@@ -43,9 +43,11 @@ export default function NewDepotPage({openDepot, addDepot}) {
             "arithmeticalGain": 0,
         }
 
-        //stattdessen besser backend gesamtDepots neu abrufen? -> ja
-        addPortfolio(newDepot).then(responseDepot => addDepot(responseDepot)).then(update).then(history.push('/open'))
-       //  addPortfolio(newDepot).then(update).then(history.push('/open'))
+        addPortfolio(newDepot)
+            .then(responseDepot => addDepot(responseDepot))
+            .catch(error => console.error(error.message))
+            .then(update)
+            .then(history.push('/open'))
     }
 
     return (
