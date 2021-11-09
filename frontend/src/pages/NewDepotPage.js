@@ -11,6 +11,7 @@ export default function NewDepotPage({addDepot}) {
 
     const [portfolioName, setPortfolioName] = useState()
     const [symbol, setSymbol] = useState("")
+    const [symbolIsWrong, setSymbolIsWrong] = useState(false)
     const [activePortfolioItem, setActivePortfolioItem] = useState()
     const [portfolioItems, setPortfolioItems] = useState([])
     const history = useHistory()
@@ -25,10 +26,16 @@ export default function NewDepotPage({addDepot}) {
 
     const handleSymbolSubmit = event => {
         event.preventDefault()
+        setSymbolIsWrong(false)
         if (!symbol) {
             return <div>Couldn't find item with symbol: {symbol}</div>
         }
-        getPortfolioItem(symbol).catch(error => console.error(error.message)).then(portfolioItem => setActivePortfolioItem(portfolioItem))
+        getPortfolioItem(symbol)
+            .catch(error => {
+                console.error(error.message)
+                setSymbolIsWrong(true)
+            })
+            .then(portfolioItem => setActivePortfolioItem(portfolioItem))
     }
 
     const saveDepot = () => {
@@ -45,14 +52,14 @@ export default function NewDepotPage({addDepot}) {
 
         addPortfolio(newDepot)
             .then(responseDepot => addDepot(responseDepot))
-            .catch(error => console.error(error.message))
+            .catch(error => {console.error(error.message)})
             .then(update)
             .then(history.push('/open'))
     }
 
     return (
         <div className={classes.page}>
-            <Typography variant="h4" gutterBottom>Create a new depot:</Typography>
+            <Typography variant="h4" gutterBottom>Create a new depot</Typography>
             <TextField id="depotName" label="Name your new Depot" variant="outlined" autoComplete='off'
                        margin="normal"
                        onChange={event => setPortfolioName(event.target.value)}/>
@@ -60,6 +67,7 @@ export default function NewDepotPage({addDepot}) {
                 <Typography variant="h5">Add a stock:</Typography>
                 <TextField id="stockName" label="Enter symbol" variant="outlined" value={symbol} autoComplete='off'
                            margin="normal"
+                           error={symbolIsWrong}
                            onChange={event => setSymbol(event.target.value)}/>
             </form>
             <AddPortfolioItem
@@ -77,7 +85,7 @@ export default function NewDepotPage({addDepot}) {
 
             {portfolioItems.length === 0 ? <></> :
                 <Container className={classes.cardGrid}>
-                    <Typography variant="h5" gutterBottom>Already added:</Typography>
+                    <Typography variant="h5" gutterBottom>Added</Typography>
                     <Grid container spacing={2}>
                         {portfolioItems.map(stock => {
                             return (
