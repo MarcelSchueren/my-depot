@@ -8,8 +8,8 @@ export default function OpenDepotPage({openDepot}) {
     const classes = useStyles();
     const {depots} = useDepots()
 
-    if (!depots) {
-        return <div> No active depots! Create one with "new"</div>
+    if (depots.length===0) {
+        return <div> No active depots. Create one with "new Depot".</div>
     }
 
     return (
