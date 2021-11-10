@@ -1,4 +1,13 @@
-import {Button, Checkbox, FormControlLabel, FormGroup, TextField, Typography} from "@mui/material";
+import {
+    Button,
+    Checkbox,
+    FormControl,
+    FormControlLabel,
+    FormGroup, InputAdornment,
+    InputLabel, OutlinedInput,
+    TextField,
+    Typography
+} from "@mui/material";
 import {useState} from "react";
 
 export default function AddPortfolioItem({
@@ -10,6 +19,8 @@ export default function AddPortfolioItem({
 
 
     const [quantityPortfolioItem, setQuantityPortfolioItem] = useState(0)
+    const [checked, setChecked] = useState(true)
+    const [boughtAtPrice, setBoughtAtPrice] = useState()
 
     if (!activePortfolioItem) {
         return <></>
@@ -21,10 +32,16 @@ export default function AddPortfolioItem({
             return
         }
         activePortfolioItem.quantity = quantityPortfolioItem
-        activePortfolioItem.boughtAtPricePerShare = activePortfolioItem.regularMarketPrice
+        if (checked) {
+            activePortfolioItem.boughtAtPricePerShare = activePortfolioItem.regularMarketPrice
+        } else {
+            activePortfolioItem.boughtAtPricePerShare = boughtAtPrice;
+        }
         setPortfolioItems([...portfolioItems, activePortfolioItem])
         setQuantityPortfolioItem(0)
         clearActivePortfolioItem()
+        setChecked(true)
+        setBoughtAtPrice(0)
     }
 
     return (
@@ -39,13 +56,25 @@ export default function AddPortfolioItem({
                     shrink: true,
                 }}
                 variant="filled"
-                InputProps={{ inputProps: { min: 1 } }}
+                InputProps={{inputProps: {min: 1}}}
                 // value={quantityPortfolioItem}
                 onChange={event => setQuantityPortfolioItem(event.target.value)}
             />
             <FormGroup>
-                <FormControlLabel control={<Checkbox defaultChecked/>} label="Add with actual price"/>
+                <FormControlLabel control={<Checkbox defaultChecked onChange={() => setChecked(!checked)}/>}
+                                  label="Add with actual price"/>
             </FormGroup>
+            {checked === false ?
+                <FormControl>
+                    <InputLabel htmlFor="amount">Price / p.</InputLabel>
+                    <OutlinedInput
+                        id="amount"
+                        value={boughtAtPrice}
+                        onChange={(event) => setBoughtAtPrice(event.target.value)}
+                        startAdornment={<InputAdornment position="start">€</InputAdornment>}
+                        label="Amount"
+                    />
+                </FormControl> : <></>}
             <Button variant="outlined" onClick={addPortfolioItem}>Add</Button>
         </section>
     )
