@@ -47,8 +47,8 @@ export default function AddPortfolioItem({
 
     return (
         <section>
-            <Typography>Display-Name: {activePortfolioItem.displayName}</Typography>
-            <Typography>Actual Price: {activePortfolioItem.regularMarketPrice} $ / piece</Typography>
+            <Typography>Found: {activePortfolioItem.displayName}</Typography>
+            <Typography>Price: {activePortfolioItem.regularMarketPrice.toFixed(2)} € / piece</Typography>
             <TextField
                 id="filled-number"
                 label="Number of pieces"
