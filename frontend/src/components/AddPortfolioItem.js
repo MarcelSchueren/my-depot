@@ -19,7 +19,7 @@ export default function AddPortfolioItem({
 
 
     const [quantityPortfolioItem, setQuantityPortfolioItem] = useState(0)
-    const [checked, setChecked] = useState(true)
+    const [checkedActualPrice, setCheckedActualPrice] = useState(true)
     const [boughtAtPrice, setBoughtAtPrice] = useState()
 
     if (!activePortfolioItem) {
@@ -32,15 +32,16 @@ export default function AddPortfolioItem({
             return
         }
         activePortfolioItem.quantity = quantityPortfolioItem
-        if (checked) {
+        if (checkedActualPrice) {
             activePortfolioItem.boughtAtPricePerShare = activePortfolioItem.regularMarketPrice
         } else {
             activePortfolioItem.boughtAtPricePerShare = boughtAtPrice;
         }
         setPortfolioItems([...portfolioItems, activePortfolioItem])
+
         setQuantityPortfolioItem(0)
         clearActivePortfolioItem()
-        setChecked(true)
+        setCheckedActualPrice(true)
         setBoughtAtPrice(0)
     }
 
@@ -61,10 +62,10 @@ export default function AddPortfolioItem({
                 onChange={event => setQuantityPortfolioItem(event.target.value)}
             />
             <FormGroup>
-                <FormControlLabel control={<Checkbox defaultChecked onChange={() => setChecked(!checked)}/>}
+                <FormControlLabel control={<Checkbox defaultChecked onChange={() => setCheckedActualPrice(!checkedActualPrice)}/>}
                                   label="Add with actual price"/>
             </FormGroup>
-            {checked === false ?
+            {checkedActualPrice === false ?
                 <FormControl>
                     <InputLabel htmlFor="amount">Price / p.</InputLabel>
                     <OutlinedInput

@@ -1,13 +1,13 @@
-import {Button, Container, Grid, TextField, Typography} from "@mui/material";
+import {Button, TextField, Typography} from "@mui/material";
 import useStyles from "../hooks/useStyles";
 import {useState} from "react";
 import {addPortfolio, getPortfolioItem} from "../service/depot-api-service";
 import AddPortfolioItem from "../components/AddPortfolioItem";
-import PortfolioItem from "../components/PortfolioItem";
 import {useHistory} from "react-router-dom";
 import useDepots from "../hooks/useDepots";
+import CardGrid from "../components/CardGrid";
 
-export default function NewDepotPage({addDepot}) {
+export default function NewDepotPage() {
 
     const [portfolioName, setPortfolioName] = useState()
     const [symbol, setSymbol] = useState("")
@@ -15,7 +15,7 @@ export default function NewDepotPage({addDepot}) {
     const [activePortfolioItem, setActivePortfolioItem] = useState()
     const [portfolioItems, setPortfolioItems] = useState([])
     const history = useHistory()
-    const {update} = useDepots()
+    const {update, addDepot} = useDepots()
 
     const classes = useStyles()
 
@@ -27,14 +27,11 @@ export default function NewDepotPage({addDepot}) {
     const handleSymbolSubmit = event => {
         event.preventDefault()
         setSymbolIsWrong(false)
-        if (!symbol) {
-            return <div>Couldn't find item with symbol: {symbol}</div>
+        if (symbol==="") {
+            return <></>
         }
         getPortfolioItem(symbol)
-            .catch(error => {
-                console.error(error.message)
-                setSymbolIsWrong(true)
-            })
+            .catch(() => {setSymbolIsWrong(true)})
             .then(portfolioItem => setActivePortfolioItem(portfolioItem))
     }
 
@@ -52,8 +49,8 @@ export default function NewDepotPage({addDepot}) {
 
         addPortfolio(newDepot)
             .then(responseDepot => addDepot(responseDepot))
-            .catch(error => {console.error(error.message)})
             .then(update)
+            .catch(error => {console.error(error.message)})
             .then(history.push('/open'))
     }
 
@@ -82,21 +79,7 @@ export default function NewDepotPage({addDepot}) {
                     <Button variant="contained" onClick={saveDepot}> Save Depot </Button>
                 </div>
                 : <></>}
-
-            {portfolioItems.length === 0 ? <></> :
-                <Container className={classes.cardGrid}>
-                    <Typography variant="h5" gutterBottom>Added</Typography>
-                    <Grid container spacing={2}>
-                        {portfolioItems.map(stock => {
-                            return (
-                                <Grid item key={stock.id} xs={12} sm={6} md={4}>
-                                    <PortfolioItem stock={stock} key={stock.id}/>
-                                </Grid>
-                            )
-                        })}
-                    </Grid>
-                </Container>}
+            {portfolioItems.length === 0 ? <></> : <CardGrid portfolioItems={portfolioItems} text={"Added"}/>}
         </div>
     )
 }
-

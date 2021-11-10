@@ -14,7 +14,7 @@ import Footer from "./components/Footer";
 
 function App() {
 
-    const {depots, addDepot} = useDepots()
+    const {depots} = useDepots()
     const [activeDepot, setActiveDepot] = useState()
 
     const openDepot = (depot) => setActiveDepot(depot)
@@ -40,7 +40,7 @@ function App() {
                     <Header/>
                     <Switch>
                         <Route path="/new" >
-                            <NewDepotPage addDepot={addDepot}/>
+                            <NewDepotPage />
                         </Route>
                         <Route path="/edit">
                             <EditDepotPage/>
