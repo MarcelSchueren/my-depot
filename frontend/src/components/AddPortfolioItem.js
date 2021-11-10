@@ -58,7 +58,6 @@ export default function AddPortfolioItem({
                 }}
                 variant="filled"
                 InputProps={{inputProps: {min: 1}}}
-                // value={quantityPortfolioItem}
                 onChange={event => setQuantityPortfolioItem(event.target.value)}
             />
             <FormGroup>
