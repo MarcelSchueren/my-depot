@@ -14,7 +14,13 @@ export default function HomePage({activeDepot}) {
         <div className={classes.page}>
             <Typography variant="h4" gutterBottom>{activeDepot.name}</Typography>
             <Typography variant="h5" gutterBottom>{activeDepot.valueOfPortfolio.toFixed(2)} € </Typography>
-            <Typography variant="h7"> since purchase: {activeDepot.arithmeticalGain.toFixed(2)} € </Typography>
+            <Typography variant="h7">
+                since purchase: {activeDepot.arithmeticalGain.toFixed(2)} €
+                ({
+                (activeDepot.arithmeticalGain / activeDepot.purchaseCostsOfPortfolio * 100).toFixed(2)
+            }%)
+            </Typography>
+
             <CardGrid portfolioItems={activeDepot.portfolioItems} text={""}/>
         </div>
     )
