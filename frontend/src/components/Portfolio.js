@@ -8,7 +8,7 @@ export default function Portfolio({depot, openDepot}) {
     const classes = useStyles()
     const history = useHistory()
 
-    const handleClick=()=>{
+    const handleClick = () => {
         openDepot(depot)
         history.push("/")
     }
@@ -18,9 +18,17 @@ export default function Portfolio({depot, openDepot}) {
             <CardContent>
                 <Typography variant="h4">{depot.name}</Typography>
                 <Typography variant="h5">{depot.valueOfPortfolio.toFixed(2)} € </Typography>
-                   </CardContent>
+                <Typography variant="h5">
+                    {((depot.purchaseCostsOfPortfolio - depot.valueOfPortfolio)
+                            / (depot.purchaseCostsOfPortfolio)
+                            * -100).toFixed(2)
+                    }
+                    %
+                </Typography>
+            </CardContent>
             <CardActions style={{justifyContent: 'center'}}>
                 <Button size="small" onClick={handleClick}>Open</Button>
             </CardActions>
         </Card>
-    )}
+    )
+}
