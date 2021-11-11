@@ -17,7 +17,7 @@ export default function PortfolioItem({stock}) {
                 <Typography variant="h4" align="left">{stock.displayName}</Typography>
                 <Typography variant="h5">{stock.quantity} pcs. á {(stock.regularMarketPrice).toFixed(2)} € </Typography>
                 <Typography variant="h5"> = {(stock.quantity * stock.regularMarketPrice).toFixed(2)} € </Typography>
-                <Typography variant="h5">
+                <Typography variant="h5" color={percentageChange < 0 ? "red" : "green"}>
                     {percentageChange.toFixed(2)}
                     %
                 </Typography>

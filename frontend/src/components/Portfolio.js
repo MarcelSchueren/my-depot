@@ -20,7 +20,7 @@ export default function Portfolio({depot, openDepot}) {
             <CardContent>
                 <Typography variant="h4">{depot.name}</Typography>
                 <Typography variant="h5">{depot.valueOfPortfolio.toFixed(2)} € </Typography>
-                <Typography variant="h5">
+                <Typography variant="h5" color={percentageChange < 0 ? "red" : "green"}>
                     {percentageChange.toFixed(2)}
                     %
                 </Typography>
