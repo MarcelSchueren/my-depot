@@ -14,8 +14,9 @@ export default function NewDepotPage() {
     const [symbolIsWrong, setSymbolIsWrong] = useState(false)
     const [activePortfolioItem, setActivePortfolioItem] = useState()
     const [portfolioItems, setPortfolioItems] = useState([])
+    const [noNameYet, setNoNameYet] = useState(false)
     const history = useHistory()
-    const {update, addDepot} = useDepots()
+    const {addDepot} = useDepots()
 
     const classes = useStyles()
 
@@ -39,6 +40,7 @@ export default function NewDepotPage() {
 
     const saveDepot = () => {
         if (portfolioName === '' || portfolioName === undefined) {
+            setNoNameYet(true);
             return;
         }
         const newDepot = {
@@ -64,7 +66,11 @@ export default function NewDepotPage() {
                        variant="outlined"
                        autoComplete='off'
                        margin="normal"
-                       onChange={event => setPortfolioName(event.target.value)}/>
+                       error={noNameYet}
+                       onChange={event => {
+                           setPortfolioName(event.target.value)
+                           setNoNameYet(false)
+                       }}/>
             <form onSubmit={handleSymbolSubmit}>
                 <Typography variant="h5">
                     Add a stock:
@@ -84,17 +90,17 @@ export default function NewDepotPage() {
                 portfolioItems={portfolioItems}
                 setPortfolioItems={setPortfolioItems}/>
 
-            {portfolioItems.length >0 &&
-                <div>
-                    <Typography variant="h5" gutterBottom>
-                        Add more stocks or save your depot
-                    </Typography>
-                    <Button variant="contained" onClick={saveDepot}>
-                        Save Depot
-                    </Button>
-                </div>
-                }
-            {portfolioItems.length !== 0 &&  <CardGrid portfolioItems={portfolioItems} text={"Added"}/>}
+            {portfolioItems.length > 0 &&
+            <div>
+                <Typography variant="h5" gutterBottom>
+                    Add more stocks or save your depot
+                </Typography>
+                <Button variant="contained" onClick={saveDepot}>
+                    Save Depot
+                </Button>
+            </div>
+            }
+            {portfolioItems.length !== 0 && <CardGrid portfolioItems={portfolioItems} text={"Added"}/>}
         </div>
     )
 }
