@@ -18,17 +18,13 @@ export default function Portfolio({depot, openDepot}) {
 
     return (
         <Card className={classes.card}>
-            <CardContent>
-                <Typography variant="h4">{depot.name}</Typography>
-                <Typography variant="h5">{depot.valueOfPortfolio.toFixed(2)} € </Typography>
-                <Typography variant="h5" color={percentageChange < 0 ? theme.palette.error.light : "lightgreen"}>
+                <Typography className={classes.cardDepotName}>{depot.name}</Typography>
+                <Typography className={classes.cardValueOfPortfolio}>{depot.valueOfPortfolio.toFixed(2)} € </Typography>
+                <Typography className={classes.cardPortfolioPercentageChange} color={percentageChange < 0 ? theme.palette.error.light : "lightgreen"}>
                     {percentageChange.toFixed(2)}
                     %
                 </Typography>
-            </CardContent>
-            <CardActions style={{justifyContent: 'center'}}>
-                <Button size="small" onClick={handleClick}>Open</Button>
-            </CardActions>
+                <Button className={classes.cardPortfolioButton} size="small" onClick={handleClick}>Open</Button>
         </Card>
     )
 }

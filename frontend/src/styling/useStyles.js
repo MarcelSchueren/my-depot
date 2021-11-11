@@ -4,12 +4,11 @@ const useStyles = makeStyles((theme) => ({
     cardGrid: {
         padding: '20px 0',
     },
-    card: {
+
+     card: {
         backgroundColor: theme.palette.background.default,
         height: '100%',
         width: '100%',
-        // display: 'flex',
-        // flexDirection: 'column',
         display: 'grid',
         gridTemplateColumns: '1fr 1fr 1fr',
         gridTemplateRows: '1fr 1fr 1fr',
@@ -17,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
     cardSymbol: {
         backgroundColor: theme.palette.primary.light,
-        color: theme.palette.common.white,
+        color: theme.palette.text.primary,
         gridColumnStart: '1',
         gridColumnEnd: '3',
         gridRowStart: '1',
@@ -62,16 +61,53 @@ const useStyles = makeStyles((theme) => ({
         padding: '10px'
     },
 
+    cardDepotName: {
+        backgroundColor: theme.palette.primary.light,
+        color: theme.palette.text.primary,
+        gridColumnStart: '1',
+        gridColumnEnd: '3',
+        gridRowStart: '1',
+        gridRowEnd: '2',
+        display: 'inline',
+        padding: '10px'
+    },
+
+    cardValueOfPortfolio: {
+        gridColumnStart: '3',
+        gridColumnEnd: '4',
+        gridRowStart: '3',
+        gridRowEnd: '4',
+        padding: '10px',
+        align: 'right'
+    },
+
+    cardPortfolioButton: {
+        gridColumnStart: '2',
+        gridColumnEnd: '3',
+        gridRowStart: '3',
+        gridRowEnd: '4',
+    },
+
+    cardPortfolioPercentageChange: {
+        backgroundColor: theme.palette.primary.light,
+        gridColumnStart: '3',
+        gridColumnEnd: '4',
+        gridRowStart: '1',
+        gridRowEnd: '2',
+        display: 'inline',
+        textAlign: 'right',
+        padding: '10px'
+    },
+
     footer: {
         padding: '20px 0'
     },
+
     page: {
         backgroundColor: theme.palette.background.paper,
         color: theme.palette.text.primary,
         margin: '20px'
     }
-
-
 }));
 
 export default useStyles;
