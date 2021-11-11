@@ -6,6 +6,11 @@ export default function PortfolioItem({stock}) {
 
     const classes = useStyles()
 
+    const percentageChange = ((stock.quantity * stock.boughtAtPricePerShare)
+        - (stock.quantity * stock.regularMarketPrice))
+        / (stock.quantity * stock.boughtAtPricePerShare)
+        * (-100)
+
     return (
         <Card className={classes.card}>
             <CardContent>
@@ -13,11 +18,7 @@ export default function PortfolioItem({stock}) {
                 <Typography variant="h5">{stock.quantity} pcs. á {(stock.regularMarketPrice).toFixed(2)} € </Typography>
                 <Typography variant="h5"> = {(stock.quantity * stock.regularMarketPrice).toFixed(2)} € </Typography>
                 <Typography variant="h5">
-                    {
-                        (((stock.quantity * stock.boughtAtPricePerShare) - (stock.quantity * stock.regularMarketPrice))
-                            / (stock.quantity * stock.boughtAtPricePerShare)
-                            * -100).toFixed(2)
-                    }
+                    {percentageChange.toFixed(2)}
                     %
                 </Typography>
 

@@ -13,16 +13,15 @@ export default function Portfolio({depot, openDepot}) {
         history.push("/")
     }
 
+    const percentageChange = (depot.purchaseCostsOfPortfolio - depot.valueOfPortfolio) / (depot.purchaseCostsOfPortfolio) * (-100)
+
     return (
         <Card className={classes.card}>
             <CardContent>
                 <Typography variant="h4">{depot.name}</Typography>
                 <Typography variant="h5">{depot.valueOfPortfolio.toFixed(2)} € </Typography>
                 <Typography variant="h5">
-                    {((depot.purchaseCostsOfPortfolio - depot.valueOfPortfolio)
-                            / (depot.purchaseCostsOfPortfolio)
-                            * -100).toFixed(2)
-                    }
+                    {percentageChange.toFixed(2)}
                     %
                 </Typography>
             </CardContent>
