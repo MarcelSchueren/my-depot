@@ -27,11 +27,13 @@ export default function NewDepotPage() {
     const handleSymbolSubmit = event => {
         event.preventDefault()
         setSymbolIsWrong(false)
-        if (symbol==="") {
+        if (symbol === "") {
             return <></>
         }
         getPortfolioItem(symbol)
-            .catch(() => {setSymbolIsWrong(true)})
+            .catch(() => {
+                setSymbolIsWrong(true)
+            })
             .then(portfolioItem => setActivePortfolioItem(portfolioItem))
     }
 
@@ -47,22 +49,31 @@ export default function NewDepotPage() {
             "arithmeticalGain": 0,
         }
 
-        addPortfolio(newDepot)
-            .then(responseDepot => addDepot(responseDepot))
-            .then(update)
-            .catch(error => {console.error(error.message)})
-            .then(history.push('/open'))
+        addDepot(newDepot)
+            .then(() => {
+                history.push('/open')
+            })
+            .catch(error => console.log(error))
     }
 
     return (
         <div className={classes.page}>
             <Typography variant="h4" gutterBottom>Create a new depot</Typography>
-            <TextField id="depotName" label="Name your new Depot" variant="outlined" autoComplete='off'
+            <TextField id="depotName"
+                       label="Name your new Depot"
+                       variant="outlined"
+                       autoComplete='off'
                        margin="normal"
                        onChange={event => setPortfolioName(event.target.value)}/>
             <form onSubmit={handleSymbolSubmit}>
-                <Typography variant="h5">Add a stock:</Typography>
-                <TextField id="stockName" label="Enter symbol" variant="outlined" value={symbol} autoComplete='off'
+                <Typography variant="h5">
+                    Add a stock:
+                </Typography>
+                <TextField id="stockName"
+                           label="Enter symbol"
+                           variant="outlined"
+                           value={symbol}
+                           autoComplete='off'
                            margin="normal"
                            error={symbolIsWrong}
                            onChange={event => setSymbol(event.target.value)}/>
@@ -73,13 +84,17 @@ export default function NewDepotPage() {
                 portfolioItems={portfolioItems}
                 setPortfolioItems={setPortfolioItems}/>
 
-            {portfolioItems.length > 0 ?
+            {portfolioItems.length >0 &&
                 <div>
-                    <Typography variant="h5" gutterBottom>Add more stocks or save your depot</Typography>
-                    <Button variant="contained" onClick={saveDepot}> Save Depot </Button>
+                    <Typography variant="h5" gutterBottom>
+                        Add more stocks or save your depot
+                    </Typography>
+                    <Button variant="contained" onClick={saveDepot}>
+                        Save Depot
+                    </Button>
                 </div>
-                : <></>}
-            {portfolioItems.length === 0 ? <></> : <CardGrid portfolioItems={portfolioItems} text={"Added"}/>}
+                }
+            {portfolioItems.length !== 0 &&  <CardGrid portfolioItems={portfolioItems} text={"Added"}/>}
         </div>
     )
 }

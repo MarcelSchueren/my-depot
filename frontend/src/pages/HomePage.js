@@ -20,7 +20,6 @@ export default function HomePage({activeDepot}) {
                 (activeDepot.arithmeticalGain / activeDepot.purchaseCostsOfPortfolio * 100).toFixed(2)
             }%)
             </Typography>
-
             <CardGrid portfolioItems={activeDepot.portfolioItems} text={""}/>
         </div>
     )
