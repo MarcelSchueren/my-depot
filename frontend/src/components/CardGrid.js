@@ -1,6 +1,6 @@
 import {Container, Grid, Typography} from "@mui/material";
 import PortfolioItem from "./PortfolioItem";
-import useStyles from "../hooks/useStyles";
+import useStyles from "../styling/useStyles";
 
 export default function CardGrid({portfolioItems, text}){
 

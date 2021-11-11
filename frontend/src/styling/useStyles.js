@@ -1,0 +1,77 @@
+import {makeStyles} from "@mui/styles";
+
+const useStyles = makeStyles((theme) => ({
+    cardGrid: {
+        padding: '20px 0',
+    },
+    card: {
+        backgroundColor: theme.palette.background.default,
+        height: '100%',
+        width: '100%',
+        // display: 'flex',
+        // flexDirection: 'column',
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr 1fr',
+        gridTemplateRows: '1fr 1fr 1fr',
+    },
+
+    cardSymbol: {
+        backgroundColor: theme.palette.primary.light,
+        color: theme.palette.common.white,
+        gridColumnStart: '1',
+        gridColumnEnd: '3',
+        gridRowStart: '1',
+        gridRowEnd: '2',
+        display: 'inline',
+        padding: '10px'
+    },
+
+    cardPercentageChange: {
+        backgroundColor: theme.palette.primary.light,
+        gridColumnStart: '3',
+        gridColumnEnd: '4',
+        gridRowStart: '1',
+        gridRowEnd: '2',
+        display: 'inline',
+        textAlign: 'right',
+        padding: '10px'
+    },
+
+    cardDisplayName: {
+        gridColumnStart: '1',
+        gridColumnEnd: '3',
+        gridRowStart: '2',
+        gridRowEnd: '3',
+        padding: '10px'
+    },
+
+    cardQuantity: {
+        gridColumnStart: '1',
+        gridColumnEnd: '3',
+        gridRowStart: '3',
+        gridRowEnd: '4',
+        padding: '10px'
+    },
+
+    cardSum: {
+        gridColumnStart: '3',
+        gridColumnEnd: '4',
+        gridRowStart: '3',
+        gridRowEnd: '4',
+        textAlign: 'right',
+        padding: '10px'
+    },
+
+    footer: {
+        padding: '20px 0'
+    },
+    page: {
+        backgroundColor: theme.palette.background.paper,
+        color: theme.palette.text.primary,
+        margin: '20px'
+    }
+
+
+}));
+
+export default useStyles;

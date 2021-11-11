@@ -1,6 +1,6 @@
 import {Container, Grid, Typography} from "@mui/material";
 import Portfolio from "../components/Portfolio";
-import useStyles from "../hooks/useStyles";
+import useStyles from "../styling/useStyles";
 import useDepots from "../hooks/useDepots";
 
 export default function OpenDepotPage({openDepot}) {

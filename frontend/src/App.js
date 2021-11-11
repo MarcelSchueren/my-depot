@@ -11,6 +11,7 @@ import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
 import OpenDepotPage from "./pages/OpenDepotPage";
 import {useState} from "react";
 import Footer from "./components/Footer";
+import theme from "./styling/theme";
 
 function App() {
 
@@ -19,28 +20,15 @@ function App() {
 
     const openDepot = (depot) => setActiveDepot(depot)
 
-
-    const theme = createTheme({
-        palette: {
-            type: 'standard',
-            primary: {
-                main: '#3f51b5',
-            },
-            secondary: {
-                main: '#f50057',
-            },
-        },
-    })
-
     return (
-        <div>
-            <CssBaseline/>
-            <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+            <div>
+                <CssBaseline/>
                 <Router>
                     <Header/>
                     <Switch>
-                        <Route path="/new" >
-                            <NewDepotPage />
+                        <Route path="/new">
+                            <NewDepotPage/>
                         </Route>
                         <Route path="/edit">
                             <EditDepotPage/>
@@ -58,8 +46,8 @@ function App() {
                     <Footer/>
                     <NavigationBar/>
                 </Router>
-            </ThemeProvider>
-        </div>
+            </div>
+        </ThemeProvider>
     );
 }
 

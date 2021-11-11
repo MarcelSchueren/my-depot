@@ -1,5 +1,5 @@
 import {Typography} from "@mui/material";
-import useStyles from "../hooks/useStyles";
+import useStyles from "../styling/useStyles";
 import CardGrid from "../components/CardGrid";
 
 export default function HomePage({activeDepot}) {

@@ -1,5 +1,5 @@
 import {Button, TextField, Typography} from "@mui/material";
-import useStyles from "../hooks/useStyles";
+import useStyles from "../styling/useStyles";
 import {useState} from "react";
 import {getPortfolioItem} from "../service/depot-api-service";
 import AddPortfolioItem from "../components/AddPortfolioItem";
