@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
         gridRowStart: '3',
         gridRowEnd: '4',
         padding: '10px',
-        align: 'right'
+        textAlign: 'right'
     },
 
     cardPortfolioButton: {
@@ -99,6 +99,16 @@ const useStyles = makeStyles((theme) => ({
         padding: '10px'
     },
 
+    cardPortfolioAbsoluteChange: {
+        backgroundColor: theme.palette.background.default,
+        gridColumnStart: '1',
+        gridColumnEnd: '2',
+        gridRowStart: '3',
+        gridRowEnd: '4',
+        display: 'inline',
+        padding: '10px'
+    },
+
     footer: {
         padding: '20px 0'
     },
@@ -106,7 +116,7 @@ const useStyles = makeStyles((theme) => ({
     page: {
         backgroundColor: theme.palette.background.paper,
         color: theme.palette.text.primary,
-        margin: '20px'
+        padding: '20px'
     }
 }));
 
