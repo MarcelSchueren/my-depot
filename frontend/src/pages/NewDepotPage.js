@@ -1,7 +1,7 @@
 import {Button, TextField, Typography} from "@mui/material";
 import useStyles from "../hooks/useStyles";
 import {useState} from "react";
-import {addPortfolio, getPortfolioItem} from "../service/depot-api-service";
+import {getPortfolioItem} from "../service/depot-api-service";
 import AddPortfolioItem from "../components/AddPortfolioItem";
 import {useHistory} from "react-router-dom";
 import useDepots from "../hooks/useDepots";
@@ -83,6 +83,7 @@ export default function NewDepotPage() {
                            margin="normal"
                            error={symbolIsWrong}
                            onChange={event => setSymbol(event.target.value)}/>
+                <Button variant="outlined" onClick={handleSymbolSubmit}>Search</Button>
             </form>
             <AddPortfolioItem
                 activePortfolioItem={activePortfolioItem}
