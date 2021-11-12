@@ -112,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
     newPortfolioPage: {
         height: '100%',
         width: '100%',
-        backgroundColor: "theme.palette.background.paper",
+        backgroundColor: theme.palette.background.paper,
         color: theme.palette.text.primary,
         padding: '20px',
         display: 'flex',

@@ -67,7 +67,6 @@ export default function NewDepotPage() {
                            label="Name your new Depot"
                            variant="outlined"
                            autoComplete='off'
-                           margin="normal"
                            error={noNameYet}
                            onChange={event => {
                                setPortfolioName(event.target.value)
@@ -85,7 +84,6 @@ export default function NewDepotPage() {
                            size="small"
                            value={symbol}
                            autoComplete='off'
-                           //margin="normal"
                            error={symbolIsWrong}
                            onChange={event => setSymbol(event.target.value)}/>
                 <Button margin="normal" variant="outlined" onClick={handleSymbolSubmit}>Search</Button>
