@@ -9,6 +9,7 @@ import {
     Typography
 } from "@mui/material";
 import {useState} from "react";
+import useStyles from "../styling/useStyles";
 
 export default function AddPortfolioItem({
                                              activePortfolioItem,
@@ -21,6 +22,7 @@ export default function AddPortfolioItem({
     const [quantityPortfolioItem, setQuantityPortfolioItem] = useState(0)
     const [checkedActualPrice, setCheckedActualPrice] = useState(true)
     const [boughtAtPrice, setBoughtAtPrice] = useState()
+    const classes = useStyles()
 
     if (!activePortfolioItem) {
         return <></>
@@ -46,7 +48,7 @@ export default function AddPortfolioItem({
     }
 
     return (
-        <section>
+        <section className={classes.addPortfolioItem}>
             <Typography>Found: {activePortfolioItem.displayName}</Typography>
             <Typography>Price: {activePortfolioItem.regularMarketPrice.toFixed(2)} € / piece</Typography>
             <TextField

@@ -59,49 +59,58 @@ export default function NewDepotPage() {
     }
 
     return (
-        <div className={classes.page}>
-            <Typography variant="h4" gutterBottom>Create a new depot</Typography>
-            <TextField id="depotName"
-                       label="Name your new Depot"
-                       variant="outlined"
-                       autoComplete='off'
-                       margin="normal"
-                       error={noNameYet}
-                       onChange={event => {
-                           setPortfolioName(event.target.value)
-                           setNoNameYet(false)
-                       }}/>
+        <div className={classes.newPortfolioPage}>
+
+            <div>
+                <Typography variant="h4" gutterBottom>Create a new depot</Typography>
+                <TextField id="depotName"
+                           label="Name your new Depot"
+                           variant="outlined"
+                           autoComplete='off'
+                           margin="normal"
+                           error={noNameYet}
+                           onChange={event => {
+                               setPortfolioName(event.target.value)
+                               setNoNameYet(false)
+                           }}/>
+            </div>
+
+            <Typography variant="h5" margin="normal">
+                Add a stock
+            </Typography>
             <form onSubmit={handleSymbolSubmit}>
-                <Typography variant="h5">
-                    Add a stock:
-                </Typography>
                 <TextField id="stockName"
                            label="Enter symbol"
                            variant="outlined"
+                           size="small"
                            value={symbol}
                            autoComplete='off'
-                           margin="normal"
+                           //margin="normal"
                            error={symbolIsWrong}
                            onChange={event => setSymbol(event.target.value)}/>
-                <Button variant="outlined" onClick={handleSymbolSubmit}>Search</Button>
+                <Button margin="normal" variant="outlined" onClick={handleSymbolSubmit}>Search</Button>
             </form>
+
             <AddPortfolioItem
                 activePortfolioItem={activePortfolioItem}
                 clearActivePortfolioItem={clearActivePortfolioItem}
                 portfolioItems={portfolioItems}
                 setPortfolioItems={setPortfolioItems}/>
 
-            {portfolioItems.length > 0 &&
-            <div>
-                <Typography variant="h5" gutterBottom>
-                    Add more stocks or save your depot
-                </Typography>
-                <Button variant="contained" onClick={saveDepot}>
-                    Save Depot
-                </Button>
-            </div>
+            {
+                portfolioItems.length > 0 &&
+                <div>
+                    <Typography variant="h5" gutterBottom>
+                        Add more stocks or save your depot
+                    </Typography>
+                    <Button variant="contained" onClick={saveDepot}>
+                        Save Depot
+                    </Button>
+                </div>
             }
-            {portfolioItems.length !== 0 && <CardGrid portfolioItems={portfolioItems} text={"Added"}/>}
+            {
+                portfolioItems.length !== 0 && <CardGrid portfolioItems={portfolioItems} text={"Added"}/>
+            }
         </div>
     )
 }
