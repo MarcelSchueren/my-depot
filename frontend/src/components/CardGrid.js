@@ -2,7 +2,7 @@ import {Container, Grid, Typography} from "@mui/material";
 import PortfolioItem from "./PortfolioItem";
 import useStyles from "../styling/useStyles";
 
-export default function CardGrid({portfolioItems, text}){
+export default function CardGrid({portfolioItems, text, openPortfolioItem}){
 
     const classes = useStyles()
 
@@ -13,7 +13,7 @@ export default function CardGrid({portfolioItems, text}){
                 {portfolioItems.map(stock => {
                     return (
                         <Grid item key={stock.id} xs={12} sm={6} md={4}>
-                            <PortfolioItem stock={stock} key={stock.id}/>
+                            <PortfolioItem stock={stock} key={stock.id} openPortfolioItem={openPortfolioItem}/>
                         </Grid>
                     )
                 })}

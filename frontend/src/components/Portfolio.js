@@ -22,11 +22,13 @@ export default function Portfolio({depot, openDepot}) {
             <Typography className={classes.cardValueOfPortfolio}>{depot.valueOfPortfolio.toFixed(2)} € </Typography>
             <Typography className={classes.cardPortfolioPercentageChange}
                         color={percentageChange < 0 ? theme.palette.error.light : "lightgreen"}>
+                {percentageChange > 0 ? '+' : <></>}
                 {percentageChange.toFixed(2)}
                 %
             </Typography>
             <Typography className={classes.cardPortfolioAbsoluteChange}
                         color={absoluteGain < 0 ? theme.palette.error.light : "lightgreen"}>
+                {percentageChange > 0 ? '+' : <></>}
                 {absoluteGain.toFixed(2)}
                 €
             </Typography>

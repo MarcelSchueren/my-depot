@@ -118,45 +118,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         gap: '20px',
-        // justifyContent: 'space-between',
-        // gridTemplateColumns: '1fr 1fr',
-        // gridTemplateRows: '1fr 1fr 1fr 1fr',
     },
-
-    // namePortfolio: {
-    //     gridColumnStart: '1',
-    //     gridColumnEnd: '2',
-    //     gridRowStart: '1',
-    //     gridRowEnd: '2',
-    // },
-    //
-    // addStock: {
-    //     gridColumnStart: '1',
-    //     gridColumnEnd: '2',
-    //     gridRowStart: '2',
-    //     gridRowEnd: '3',
-    // },
-    //
-    // addPortfolioItem: {
-    //     gridColumnStart: '3',
-    //     gridColumnEnd: '2',
-    //     gridRowStart: '3',
-    //     gridRowEnd: '4',
-    // },
-    //
-    // newPortfolioButton: {
-    //     gridColumnStart: '2',
-    //     gridColumnEnd: '3',
-    //     gridRowStart: '1',
-    //     gridRowEnd: '2',
-    // },
-    //
-    // portfolioItemsGridPlace: {
-    //     gridColumnStart: '1',
-    //     gridColumnEnd: '3',
-    //     gridRowStart: '4',
-    //     gridRowEnd: '5',
-    // },
 
     footer: {
         // padding: '20px 0'
@@ -165,7 +127,7 @@ const useStyles = makeStyles((theme) => ({
     page: {
         backgroundColor: theme.palette.background.paper,
         color: theme.palette.text.primary,
-        padding: '20px'
+        padding: '20px',
     }
 }));
 

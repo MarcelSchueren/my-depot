@@ -2,7 +2,7 @@ import {Typography} from "@mui/material";
 import useStyles from "../styling/useStyles";
 import CardGrid from "../components/CardGrid";
 
-export default function HomePage({activeDepot}) {
+export default function HomePage({activeDepot, openPortfolioItem}) {
 
     const classes = useStyles();
 
@@ -20,7 +20,7 @@ export default function HomePage({activeDepot}) {
                 (activeDepot.arithmeticalGain / activeDepot.purchaseCostsOfPortfolio * 100).toFixed(2)
             }%)
             </Typography>
-            <CardGrid portfolioItems={activeDepot.portfolioItems} text={""}/>
+            <CardGrid portfolioItems={activeDepot.portfolioItems} openPortfolioItem={openPortfolioItem} text={""}/>
         </div>
     )
 }
