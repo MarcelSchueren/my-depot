@@ -27,9 +27,11 @@ export default function PortfolioItemDetailsPage({activePortfolioItem}) {
 
     return (
         <div className={classes.page}>
-            <PortfolioItem stock={activePortfolioItem} openPortfolioItem={() => {
-            }} short={true}/>
-            <TableContainer component={Paper}>
+            <PortfolioItem stock={activePortfolioItem} openPortfolioItem={} short={true}/>
+
+            <p> </p>
+
+            <TableContainer component={Paper} className={classes.tableContainer}>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -55,9 +57,9 @@ export default function PortfolioItemDetailsPage({activePortfolioItem}) {
                 </Table>
             </TableContainer>
 
-            <p></p>
+            <p> </p>
 
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} className={classes.tableContainer}>
                 <Table>
                     <TableHead>
                         <TableRow>

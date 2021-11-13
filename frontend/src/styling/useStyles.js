@@ -120,6 +120,10 @@ const useStyles = makeStyles((theme) => ({
         gap: '20px',
     },
 
+    tableContainer: {
+        backgroundColor: theme.palette.background.default,
+    },
+
     footer: {
         // padding: '20px 0'
     },
