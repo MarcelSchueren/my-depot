@@ -66,4 +66,39 @@ public class YahooFinanceService {
     public String getDisplayName(Stock stock) {
         return stock.getName();
     }
+
+    public BigDecimal getDayHigh(Map<String, Stock> stocks, PortfolioItem portfolioItem) {
+        if (stocks.get(portfolioItem.getSymbol()).getCurrency().equals("USD")) {
+            return changeUSDinEUR(stocks.get(portfolioItem.getSymbol()).getQuote().getDayHigh());
+        }
+        return stocks.get(portfolioItem.getSymbol()).getQuote().getDayHigh();
+    }
+
+    public BigDecimal getDayLow(Map<String, Stock> stocks, PortfolioItem portfolioItem) {
+        if (stocks.get(portfolioItem.getSymbol()).getCurrency().equals("USD")) {
+            return changeUSDinEUR(stocks.get(portfolioItem.getSymbol()).getQuote().getDayLow());
+        }
+        return stocks.get(portfolioItem.getSymbol()).getQuote().getDayLow();
+    }
+
+    public BigDecimal getYearHigh(Map<String, Stock> stocks, PortfolioItem portfolioItem) {
+        if (stocks.get(portfolioItem.getSymbol()).getCurrency().equals("USD")) {
+            return changeUSDinEUR(stocks.get(portfolioItem.getSymbol()).getQuote().getYearHigh());
+        }
+            return stocks.get(portfolioItem.getSymbol()).getQuote().getYearHigh();
+    }
+
+    public BigDecimal getYearLow(Map<String, Stock> stocks, PortfolioItem portfolioItem) {
+        if (stocks.get(portfolioItem.getSymbol()).getCurrency().equals("USD")) {
+            return changeUSDinEUR(stocks.get(portfolioItem.getSymbol()).getQuote().getYearLow());
+        }
+            return stocks.get(portfolioItem.getSymbol()).getQuote().getYearLow();
+    }
+
+    public BigDecimal getDividend(Map<String, Stock> stocks, PortfolioItem portfolioItem) {
+        if(stocks.get(portfolioItem.getSymbol()).getDividend().getAnnualYieldPercent() == null){
+            return BigDecimal.ZERO;
+        }
+        return stocks.get(portfolioItem.getSymbol()).getDividend().getAnnualYieldPercent();
+    }
 }

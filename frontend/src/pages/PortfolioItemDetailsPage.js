@@ -1,10 +1,8 @@
-import {useParams} from "react-router-dom";
 import useStyles from "../styling/useStyles";
-import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
+import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import PortfolioItem from "../components/PortfolioItem";
 
 export default function PortfolioItemDetailsPage({activePortfolioItem}) {
-    const {id} = useParams()
     const classes = useStyles()
 
     function createData(nameOfValue, value, unit) {
@@ -12,19 +10,19 @@ export default function PortfolioItemDetailsPage({activePortfolioItem}) {
     }
 
     const rowsOverview = [
-        createData('Regular Market Price', activePortfolioItem.regularMarketPrice.toFixed(2), '€ / p'),
         createData('Bought at Price', activePortfolioItem.boughtAtPricePerShare.toFixed(2), '€ / p'),
-        createData('Arithmetical absolute Gain per piece', (activePortfolioItem.regularMarketPrice - activePortfolioItem.boughtAtPricePerShare).toFixed(2), '€ / p'),
         createData('Quantity', activePortfolioItem.quantity, 'p.'),
-        createData('Arithmetical absolute Gain', ((activePortfolioItem.regularMarketPrice - activePortfolioItem.boughtAtPricePerShare) * activePortfolioItem.quantity).toFixed(2), '€'),
+        createData('arithm. abs. Gain (/p)', (activePortfolioItem.regularMarketPrice - activePortfolioItem.boughtAtPricePerShare).toFixed(2), '€ / p'),
+        createData('arithm. abs. Gain', ((activePortfolioItem.regularMarketPrice - activePortfolioItem.boughtAtPricePerShare) * activePortfolioItem.quantity).toFixed(2), '€'),
     ];
 
     const rowsDetail = [
-        createData('Day high', activePortfolioItem.regularMarketPrice.toFixed(2), '€ / p'),
-        createData('Day low', activePortfolioItem.boughtAtPricePerShare.toFixed(2), '€ / p'),
-        createData('Year high', (activePortfolioItem.regularMarketPrice - activePortfolioItem.boughtAtPricePerShare).toFixed(2), '€ / p'),
-        createData('Year low', activePortfolioItem.quantity, '€ / p'),
-        createData('Dividend', ((activePortfolioItem.regularMarketPrice - activePortfolioItem.boughtAtPricePerShare) * activePortfolioItem.quantity).toFixed(2), '€ / p'),
+        createData('Regular Market Price', activePortfolioItem.regularMarketPrice.toFixed(2), '€ / p'),
+        createData('Day high', activePortfolioItem.dayHigh.toFixed(2), '€ / p'),
+        createData('Day low', activePortfolioItem.dayLow.toFixed(2), '€ / p'),
+        createData('Year high', activePortfolioItem.yearHigh.toFixed(2), '€ / p'),
+        createData('Year low', activePortfolioItem.yearLow.toFixed(2), '€ / p'),
+        createData('Dividend', activePortfolioItem.dividend.toFixed(2), '% pa'),
     ];
 
     return (
@@ -63,7 +61,7 @@ export default function PortfolioItemDetailsPage({activePortfolioItem}) {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Details</TableCell>
+                            <TableCell>Market Details</TableCell>
                             <TableCell align="right">Value</TableCell>
                             <TableCell align="right">Unit</TableCell>
                         </TableRow>

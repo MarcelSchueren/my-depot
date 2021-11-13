@@ -19,4 +19,9 @@ public class PortfolioItem {
     private double boughtAtPricePerShare;                   //von Frontend/DB
     private BigDecimal regularMarketPrice;                  //aus API
     private BigDecimal regularMarketChangePercent;          //aus API
+    private BigDecimal dayHigh;
+    private BigDecimal dayLow;
+    private BigDecimal yearHigh;
+    private BigDecimal yearLow;
+    private BigDecimal dividend;
 }

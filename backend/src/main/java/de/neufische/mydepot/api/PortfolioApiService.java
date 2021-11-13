@@ -30,10 +30,22 @@ public class PortfolioApiService {
 
     private List<PortfolioItem> mapStocksToPortfolioItem(Map<String, Stock> stocks, List<PortfolioItem> allItems) {
         for (PortfolioItem portfolioItem : allItems) {
+
             BigDecimal regularMarketPrice = yahooFinanceService.getRegularMarketPrice(stocks, portfolioItem);
             BigDecimal regularMarketChangePercent = yahooFinanceService.getRegularMarketChangePercent(stocks, portfolioItem);
+            BigDecimal dayHigh = yahooFinanceService.getDayHigh(stocks, portfolioItem);
+            BigDecimal dayLow = yahooFinanceService.getDayLow(stocks, portfolioItem);
+            BigDecimal yearHigh = yahooFinanceService.getYearHigh(stocks, portfolioItem);
+            BigDecimal yearLow = yahooFinanceService.getYearLow(stocks, portfolioItem);
+            BigDecimal dividend = yahooFinanceService.getDividend(stocks, portfolioItem);
+
             portfolioItem.setRegularMarketPrice(regularMarketPrice);
             portfolioItem.setRegularMarketChangePercent(regularMarketChangePercent);
+            portfolioItem.setDayHigh(dayHigh);
+            portfolioItem.setDayLow(dayLow);
+            portfolioItem.setYearHigh(yearHigh);
+            portfolioItem.setYearLow(yearLow);
+            portfolioItem.setDividend(dividend);
         }
         return allItems;
     }

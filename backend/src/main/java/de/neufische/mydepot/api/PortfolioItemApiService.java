@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import yahoofinance.Stock;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Log4j2
@@ -26,6 +27,11 @@ public class PortfolioItemApiService {
                 .symbol(symbol)
                 .displayName(yahooFinanceService.getDisplayName(portfolioItemBySymbol))
                 .regularMarketPrice(yahooFinanceService.getRegularMarketPrice(portfolioItemBySymbol))
+                .dayHigh(BigDecimal.ONE)
+                .dayLow(BigDecimal.ONE)
+                .yearHigh(BigDecimal.ONE)
+                .yearLow(BigDecimal.ONE)
+                .dividend(BigDecimal.ONE)
                 .build();
     }
 
