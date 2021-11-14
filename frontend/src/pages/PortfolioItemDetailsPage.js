@@ -1,6 +1,6 @@
 import useStyles from "../styling/useStyles";
-import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import PortfolioItem from "../components/PortfolioItem";
+import TableContainerIndiv from "../components/TableContainerIndiv";
 
 export default function PortfolioItemDetailsPage({activePortfolioItem}) {
     const classes = useStyles()
@@ -27,63 +27,14 @@ export default function PortfolioItemDetailsPage({activePortfolioItem}) {
 
     return (
         <div className={classes.page}>
-            <PortfolioItem stock={activePortfolioItem} openPortfolioItem={} short={true}/>
+            <PortfolioItem stock={activePortfolioItem} openPortfolioItem={()=>{}} short={true}/>
+            <p> </p>
+
+            <TableContainerIndiv rows={rowsOverview}/>
 
             <p> </p>
 
-            <TableContainer component={Paper} className={classes.tableContainer}>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Account Overview</TableCell>
-                            <TableCell align="right">Value</TableCell>
-                            <TableCell align="right">Unit</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rowsOverview.map((row) => (
-                            <TableRow
-                                key={row.nameOfValue}
-                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                            >
-                                <TableCell component="th" scope="row">
-                                    {row.nameOfValue}
-                                </TableCell>
-                                <TableCell align="right">{row.value}</TableCell>
-                                <TableCell align="right">{row.unit}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-
-            <p> </p>
-
-            <TableContainer component={Paper} className={classes.tableContainer}>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Market Details</TableCell>
-                            <TableCell align="right">Value</TableCell>
-                            <TableCell align="right">Unit</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rowsDetail.map((row) => (
-                            <TableRow
-                                key={row.nameOfValue}
-                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                            >
-                                <TableCell component="th" scope="row">
-                                    {row.nameOfValue}
-                                </TableCell>
-                                <TableCell align="right">{row.value}</TableCell>
-                                <TableCell align="right">{row.unit}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            <TableContainerIndiv rows={rowsDetail}/>
         </div>
     )
 }
