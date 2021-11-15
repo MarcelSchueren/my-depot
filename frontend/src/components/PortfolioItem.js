@@ -8,7 +8,7 @@ export default function PortfolioItem({stock, openPortfolioItem, short}) {
     const classes = useStyles()
     const history = useHistory()
 
-    const absoluteChange = -(stock.quantity * stock.boughtAtPricePerShare
+    const absoluteChange = (-1)*(stock.quantity * stock.boughtAtPricePerShare
         - stock.quantity * stock.regularMarketPrice)
     const percentageChange = absoluteChange
         / (stock.quantity * stock.boughtAtPricePerShare)
@@ -21,7 +21,7 @@ export default function PortfolioItem({stock, openPortfolioItem, short}) {
             <Typography variant="h4" className={classes.cardSymbol}>{stock.symbol}</Typography>
             <Typography variant="h5" className={classes.cardPercentageChange}
                         color={color}>
-                {percentageChange > 0 ? '+' : <></>}
+                {percentageChange > 0 && '+'}
                 {percentageChange.toFixed(2)}
                 %
             </Typography>
