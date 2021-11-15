@@ -31,14 +31,13 @@ class PortfolioApiServiceTest {
     void updateAll() {
         //GIVEN
 
-        PortfolioItem amazon = new PortfolioItem(
-                "1"
-                , "Amazon"
-                , "AMZN"
-                , 3
-                , 500
-                , BigDecimal.valueOf(1)
-                , BigDecimal.valueOf(0));
+        PortfolioItem amazon = PortfolioItem.builder()
+                .id("1")
+                .displayName("Amazon")
+                .symbol("AMZN")
+                .quantity(3)
+                .boughtAtPricePerShare(500)
+                .build();
 
         List<PortfolioItem> all = List.of(amazon);
 
@@ -52,15 +51,28 @@ class PortfolioApiServiceTest {
         when(yahooFinanceService.get(symbols)).thenReturn(stocks);
         when(yahooFinanceService.getRegularMarketPrice(stocks, amazon)).thenReturn(BigDecimal.valueOf(550));
         when(yahooFinanceService.getRegularMarketChangePercent(stocks, amazon)).thenReturn(BigDecimal.valueOf(10));
+        when(yahooFinanceService.getDayLow(stocks, amazon)).thenReturn(BigDecimal.valueOf(2));
+        when(yahooFinanceService.getDayHigh(stocks, amazon)).thenReturn(BigDecimal.valueOf(3));
+        when(yahooFinanceService.getYearLow(stocks, amazon)).thenReturn(BigDecimal.valueOf(1));
+        when(yahooFinanceService.getYearHigh(stocks, amazon)).thenReturn(BigDecimal.valueOf(10));
+        when(yahooFinanceService.getDividend(stocks, amazon)).thenReturn(BigDecimal.valueOf(0));
 
-        PortfolioItem amazonUpdated = new PortfolioItem(
-                "1"
-                , "Amazon"
-                , "AMZN"
-                , 3
-                , 500
-                , BigDecimal.valueOf(550)
-                , BigDecimal.valueOf(10));
+
+        PortfolioItem amazonUpdated = PortfolioItem.builder()
+                .id("1")
+                .displayName("Amazon")
+                .symbol("AMZN")
+                .quantity(3)
+                .boughtAtPricePerShare(500)
+                .regularMarketPrice(BigDecimal.valueOf(550))
+                .regularMarketChangePercent(BigDecimal.valueOf(10))
+                .dayLow(BigDecimal.valueOf(2))
+                .dayHigh(BigDecimal.valueOf(3))
+                .yearLow(BigDecimal.ONE)
+                .yearHigh(BigDecimal.valueOf(10))
+                .dividend(BigDecimal.ZERO)
+
+                .build();
 
         List<PortfolioItem> expected = List.of(amazonUpdated);
 

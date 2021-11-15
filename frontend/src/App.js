@@ -7,34 +7,26 @@ import EditDepotPage from "./pages/EditDepotPage";
 import PlayPage from "./pages/PlayPage";
 import HomePage from "./pages/HomePage";
 import useDepots from "./hooks/useDepots";
-import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
+import {CssBaseline, ThemeProvider} from "@mui/material";
 import OpenDepotPage from "./pages/OpenDepotPage";
 import {useState} from "react";
 import Footer from "./components/Footer";
+import theme from "./styling/theme";
+import PortfolioItemDetailsPage from "./pages/PortfolioItemDetailsPage";
 
 function App() {
 
     const {depots} = useDepots()
     const [activeDepot, setActiveDepot] = useState()
+    const [activePortfolioItem, setActivePortfolioItem] = useState({})
 
     const openDepot = (depot) => setActiveDepot(depot)
-
-    const theme = createTheme({
-        palette: {
-            type: 'standard',
-            primary: {
-                main: '#3f51b5',
-            },
-            secondary: {
-                main: '#f50057',
-            },
-        },
-    })
+    const openPortfolioItem = (portfolioItem) => setActivePortfolioItem(portfolioItem)
 
     return (
-        <div>
-            <CssBaseline/>
-            <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+            <div>
+                <CssBaseline/>
                 <Router>
                     <Header/>
                     <Switch>
@@ -50,15 +42,18 @@ function App() {
                         <Route path="/play">
                             <PlayPage/>
                         </Route>
+                        <Route path={"/details/:id"}>
+                            <PortfolioItemDetailsPage activePortfolioItem={activePortfolioItem}/>
+                        </Route>
                         <Route path="/">
-                            <HomePage activeDepot={activeDepot}/>
+                            <HomePage activeDepot={activeDepot} openPortfolioItem={openPortfolioItem}/>
                         </Route>
                     </Switch>
                     <Footer/>
                     <NavigationBar/>
                 </Router>
-            </ThemeProvider>
-        </div>
+            </div>
+        </ThemeProvider>
     );
 }
 
