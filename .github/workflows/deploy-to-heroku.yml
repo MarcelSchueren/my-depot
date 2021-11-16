@@ -1,5 +1,3 @@
-name: Deploy TodoApp to Heroku
-
 on:
   push:
     branches:
