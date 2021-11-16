@@ -16,7 +16,7 @@ public class PortfolioItemController {
         this.portfolioItemService = portfolioItemService;
     }
 
-    @GetMapping("/{symbol}")
+    @GetMapping("{symbol}")
     public PortfolioItem getPortfolioItem(@PathVariable String symbol) {
         return portfolioItemService.getPortfolioItemBySymbol(symbol);
     }

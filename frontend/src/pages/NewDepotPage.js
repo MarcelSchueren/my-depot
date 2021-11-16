@@ -29,7 +29,7 @@ export default function NewDepotPage() {
         event.preventDefault()
         setSymbolIsWrong(false)
         if (symbol === "") {
-            return <></>
+            return
         }
         getPortfolioItem(symbol)
             .catch(() => {
@@ -39,7 +39,7 @@ export default function NewDepotPage() {
     }
 
     const saveDepot = () => {
-        if (portfolioName === '' || portfolioName === undefined) {
+        if (!portfolioName?.length) {
             setNoNameYet(true);
             return;
         }

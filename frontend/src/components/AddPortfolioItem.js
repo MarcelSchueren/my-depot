@@ -66,7 +66,7 @@ export default function AddPortfolioItem({
                 <FormControlLabel control={<Checkbox defaultChecked onChange={() => setCheckedActualPrice(!checkedActualPrice)}/>}
                                   label="Add with actual price"/>
             </FormGroup>
-            {checkedActualPrice === false ?
+            {!checkedActualPrice &&
                 <FormControl>
                     <InputLabel htmlFor="amount">Price / p.</InputLabel>
                     <OutlinedInput
@@ -76,7 +76,7 @@ export default function AddPortfolioItem({
                         startAdornment={<InputAdornment position="start">€</InputAdornment>}
                         label="Amount"
                     />
-                </FormControl> : <></>}
+                </FormControl>}
             <Button variant="outlined" onClick={addPortfolioItem}>Add</Button>
         </section>
     )
