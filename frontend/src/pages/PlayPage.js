@@ -8,7 +8,7 @@ export default function PlayPage(){
     return(
         <div className={classes.page}>
             <Typography variant="h3" gutterBottom>PlayPage</Typography>
-            <Typography variant="h5">Feature coming soon :P</Typography>
+            <Typography variant="h5">Feature coming soon :P!</Typography>
         </div>
     )
 }
