@@ -10,6 +10,7 @@ import yahoofinance.quotes.fx.FxSymbols;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import java.util.Map;
 @Service
 public class YahooFinanceService {
 
+    public static final String USD = "USD";
     private final FxQuote usdeur;
 
     public YahooFinanceService() throws IOException {
@@ -27,25 +29,26 @@ public class YahooFinanceService {
         try {
             return YahooFinance.get(symbols);
         } catch (IOException e) {
-            log.error("Error in YahooFinanceService: get", e);
+            log.error("Ausleseproblem...Error in YahooFinanceService: get");
+            throw new YahooApiException("Probleme reading the data from YahooFinance with symbols: " + Arrays.toString(symbols), e);
         }
-        return Collections.emptyMap();
     }
 
     public Stock getPortfolioItemBySymbol(String symbol) {
         try {
             return YahooFinance.get(symbol);
         } catch (IOException e) {
-            log.error("Error in YahooFinanceService: getPortfolioItemBySymbol", e);
+            log.error("Ausleseproblem...Error in YahooFinanceService: get");
+            throw new YahooApiException("Probleme reading the data from YahooFinance with symbol: " + symbol , e);
         }
-        return null;
     }
 
     public BigDecimal getRegularMarketPrice(Map<String, Stock> stocks, PortfolioItem portfolioItem) {
-        if (stocks.get(portfolioItem.getSymbol()).getCurrency().equals("USD")) {
-            return changeUSDinEUR(stocks.get(portfolioItem.getSymbol()).getQuote().getPrice());
+        Stock stock = stocks.get(portfolioItem.getSymbol());
+        if (stock.getCurrency().equals(USD)) {
+            return changeUSDinEUR(stock.getQuote().getPrice());
         }
-        return stocks.get(portfolioItem.getSymbol()).getQuote().getPrice();
+        return stock.getQuote().getPrice();
     }
 
     public BigDecimal getRegularMarketChangePercent(Map<String, Stock> stocks, PortfolioItem portfolioItem) {
@@ -68,37 +71,42 @@ public class YahooFinanceService {
     }
 
     public BigDecimal getDayHigh(Map<String, Stock> stocks, PortfolioItem portfolioItem) {
-        if (stocks.get(portfolioItem.getSymbol()).getCurrency().equals("USD")) {
-            return changeUSDinEUR(stocks.get(portfolioItem.getSymbol()).getQuote().getDayHigh());
+        Stock stock = stocks.get(portfolioItem.getSymbol());
+        if (stock.getCurrency().equals("USD")) {
+            return changeUSDinEUR(stock.getQuote().getDayHigh());
         }
-        return stocks.get(portfolioItem.getSymbol()).getQuote().getDayHigh();
+        return stock.getQuote().getDayHigh();
     }
 
     public BigDecimal getDayLow(Map<String, Stock> stocks, PortfolioItem portfolioItem) {
-        if (stocks.get(portfolioItem.getSymbol()).getCurrency().equals("USD")) {
-            return changeUSDinEUR(stocks.get(portfolioItem.getSymbol()).getQuote().getDayLow());
+        Stock stock = stocks.get(portfolioItem.getSymbol());
+        if (stock.getCurrency().equals("USD")) {
+            return changeUSDinEUR(stock.getQuote().getDayLow());
         }
-        return stocks.get(portfolioItem.getSymbol()).getQuote().getDayLow();
+        return stock.getQuote().getDayLow();
     }
 
     public BigDecimal getYearHigh(Map<String, Stock> stocks, PortfolioItem portfolioItem) {
-        if (stocks.get(portfolioItem.getSymbol()).getCurrency().equals("USD")) {
-            return changeUSDinEUR(stocks.get(portfolioItem.getSymbol()).getQuote().getYearHigh());
+        Stock stock = stocks.get(portfolioItem.getSymbol());
+        if (stock.getCurrency().equals("USD")) {
+            return changeUSDinEUR(stock.getQuote().getYearHigh());
         }
-            return stocks.get(portfolioItem.getSymbol()).getQuote().getYearHigh();
+        return stock.getQuote().getYearHigh();
     }
 
     public BigDecimal getYearLow(Map<String, Stock> stocks, PortfolioItem portfolioItem) {
-        if (stocks.get(portfolioItem.getSymbol()).getCurrency().equals("USD")) {
-            return changeUSDinEUR(stocks.get(portfolioItem.getSymbol()).getQuote().getYearLow());
+        Stock stock = stocks.get(portfolioItem.getSymbol());
+        if (stock.getCurrency().equals("USD")) {
+            return changeUSDinEUR(stock.getQuote().getYearLow());
         }
-            return stocks.get(portfolioItem.getSymbol()).getQuote().getYearLow();
+        return stock.getQuote().getYearLow();
     }
 
     public BigDecimal getDividend(Map<String, Stock> stocks, PortfolioItem portfolioItem) {
-        if(stocks.get(portfolioItem.getSymbol()).getDividend().getAnnualYieldPercent() == null){
+        Stock stock = stocks.get(portfolioItem.getSymbol());
+        if (stock.getDividend().getAnnualYieldPercent() == null) {
             return BigDecimal.ZERO;
         }
-        return stocks.get(portfolioItem.getSymbol()).getDividend().getAnnualYieldPercent();
+        return stock.getDividend().getAnnualYieldPercent();
     }
 }
