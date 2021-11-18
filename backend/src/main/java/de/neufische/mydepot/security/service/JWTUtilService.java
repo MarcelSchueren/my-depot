@@ -1,5 +1,6 @@
 package de.neufische.mydepot.security.service;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,5 +28,10 @@ public class JWTUtilService {
                 .signWith(SignatureAlgorithm.HS256, JWT_SECRET)
                 .compact();
 
+    }
+
+    public String extractUsername(String token) {
+        Claims claims = Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token).getBody();
+        return claims.getSubject();
     }
 }
