@@ -4,14 +4,16 @@ import de.neufische.mydepot.api.PortfolioApiService;
 import de.neufische.mydepot.model.Portfolio;
 import de.neufische.mydepot.model.PortfolioItem;
 import de.neufische.mydepot.repo.PortfolioRepo;
+import de.neufische.mydepot.security.model.AppUser;
+import de.neufische.mydepot.security.repo.AppUserRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -22,6 +24,12 @@ import static org.hamcrest.Matchers.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class PortfolioControllerTest {
+
+    @Autowired
+    private AppUserRepo userRepo;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -40,6 +48,13 @@ class PortfolioControllerTest {
     @Test
     @DisplayName("Should return the newPortfolio with an id from db")
     void createPortfolio() {
+
+        userRepo.save(AppUser.builder().username("test_username").password(passwordEncoder.encode("some-password")).build());
+        AppUser loginData = new AppUser("test_username", "some-password");
+        ResponseEntity<String> response = restTemplate.postForEntity("/auth/login", loginData, String.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(response.getBody());
+
         //GIVE
         PortfolioItem newPortfolioItem = PortfolioItem.builder()
                 .id("1")
@@ -58,7 +73,7 @@ class PortfolioControllerTest {
                 .build();
 
         //WHEN
-        ResponseEntity<Portfolio> postResponse = restTemplate.postForEntity("/portfolio", newPortfolio, Portfolio.class);
+        ResponseEntity<Portfolio> postResponse = restTemplate.exchange("/portfolio", HttpMethod.POST, new HttpEntity<>(newPortfolio, headers), Portfolio.class);
         Portfolio actual = postResponse.getBody();
         //THEN
         assertEquals(HttpStatus.OK, postResponse.getStatusCode());
@@ -69,6 +84,13 @@ class PortfolioControllerTest {
     @Test
     @DisplayName("Should return the Portfolio with specific id -via get- and updated price / changePercent of PortfolioItem")
     void getPortfolio() {
+
+        userRepo.save(AppUser.builder().username("test_username").password(passwordEncoder.encode("some-password")).build());
+        AppUser loginData = new AppUser("test_username", "some-password");
+        ResponseEntity<String> response = restTemplate.postForEntity("/auth/login", loginData, String.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(response.getBody());
+
         //GIVE
         PortfolioItem newPortfolioItem = PortfolioItem.builder()
                 .id("1")
@@ -85,13 +107,13 @@ class PortfolioControllerTest {
                 .portfolioItems(List.of(newPortfolioItem))
                 .build();
 
-        ResponseEntity<Portfolio> postResponse = restTemplate.postForEntity("/portfolio", newPortfolio, Portfolio.class);
+        ResponseEntity<Portfolio> postResponse = restTemplate.exchange("/portfolio", HttpMethod.POST, new HttpEntity<>(newPortfolio, headers), Portfolio.class);
         Portfolio actual = postResponse.getBody();
         assert actual != null;
         String actualId = actual.getId();
 
         //WHEN
-        ResponseEntity<Portfolio> getResponse = restTemplate.getForEntity("/portfolio/" + actualId, Portfolio.class);
+        ResponseEntity<Portfolio> getResponse = restTemplate.exchange("/portfolio/" + actualId, HttpMethod.GET, new HttpEntity<>(headers), Portfolio.class);
         Portfolio persistedPortfolio = getResponse.getBody();
 
         //THEN
