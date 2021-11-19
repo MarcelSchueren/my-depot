@@ -6,6 +6,7 @@ import de.neufische.mydepot.model.PortfolioItem;
 import de.neufische.mydepot.repo.PortfolioRepo;
 import de.neufische.mydepot.security.model.AppUser;
 import de.neufische.mydepot.security.repo.AppUserRepo;
+import de.neufische.mydepot.service.PortfolioService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,9 @@ import static org.hamcrest.Matchers.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class PortfolioControllerTest {
+
+    @Autowired
+    private PortfolioService portfolioService;
 
     @Autowired
     private AppUserRepo userRepo;
@@ -49,11 +53,7 @@ class PortfolioControllerTest {
     @DisplayName("Should return the newPortfolio with an id from db")
     void createPortfolio() {
 
-        userRepo.save(AppUser.builder().username("test_username").password(passwordEncoder.encode("some-password")).build());
-        AppUser loginData = new AppUser("test_username", "some-password");
-        ResponseEntity<String> response = restTemplate.postForEntity("/auth/login", loginData, String.class);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(response.getBody());
+        HttpHeaders headers = getHttpHeadersWithJWT();
 
         //GIVE
         PortfolioItem newPortfolioItem = PortfolioItem.builder()
@@ -85,11 +85,7 @@ class PortfolioControllerTest {
     @DisplayName("Should return the Portfolio with specific id -via get- and updated price / changePercent of PortfolioItem")
     void getPortfolio() {
 
-        userRepo.save(AppUser.builder().username("test_username").password(passwordEncoder.encode("some-password")).build());
-        AppUser loginData = new AppUser("test_username", "some-password");
-        ResponseEntity<String> response = restTemplate.postForEntity("/auth/login", loginData, String.class);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(response.getBody());
+        HttpHeaders headers = getHttpHeadersWithJWT();
 
         //GIVE
         PortfolioItem newPortfolioItem = PortfolioItem.builder()
@@ -127,49 +123,63 @@ class PortfolioControllerTest {
         assertNotEquals(newPortfolio.getPortfolioItems().get(0).getRegularMarketPrice(), persistedPortfolio.getPortfolioItems().get(0).getRegularMarketPrice());
     }
 
-//    @Test
-//    @DisplayName("Should return the two persisted portfolios of the db")
-//    void getAllItems() {
-//        //GIVE
-//        PortfolioItem newPortfolioItem1 = PortfolioItem.builder()
-//                .displayName("Amazon")
-//                .symbol("AMZN")
-//                .quantity(3)
-//                .boughtAtPricePerShare(500)
-//                .build();
-//
-//        PortfolioItem newPortfolioItem2 = PortfolioItem.builder()
-//                .displayName("Microsoft")
-//                .symbol("MSFT")
-//                .quantity(5)
-//                .boughtAtPricePerShare(100)
-//                .build();
-//
-//        Portfolio portfolio1 = Portfolio.builder()
-//                .id("1")
-//                .name("Portfolio1")
-//                .portfolioItems(List.of(newPortfolioItem1, newPortfolioItem2))
-//                .build();
-//
-//        Portfolio portfolio2 = Portfolio.builder()
-//                .id("2")
-//                .name("Portfolio2")
-//                .portfolioItems(List.of(newPortfolioItem1, newPortfolioItem2))
-//                .build();
-//
-//        portfolioRepo.save(portfolio1);
-//        portfolioRepo.save(portfolio2);
-//
-//        //WHEN
-//        ResponseEntity<Portfolio[]> response = restTemplate.getForEntity("/portfolio", Portfolio[].class);
-//        Portfolio[] expected = new Portfolio[]{portfolio1, portfolio2};
-//        //need to update expected Portfolio:
-//        for (Portfolio portfolio : expected) {
-//            portfolio.setPortfolioItems(portfolioApiService.updateAll(portfolio.getPortfolioItems()));
-//        }
-//
-//        //THEN
-//        assertThat(response.getStatusCode(), is(HttpStatus.OK));
-//        assertArrayEquals(response.getBody(), expected);
-//    }
+    private HttpHeaders getHttpHeadersWithJWT() {
+        userRepo.save(AppUser.builder().username("test_username").password(passwordEncoder.encode("some-password")).build());
+        AppUser loginData = new AppUser("test_username", "some-password");
+        ResponseEntity<String> response = restTemplate.postForEntity("/auth/login", loginData, String.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(response.getBody());
+        return headers;
+    }
+
+    @Test
+    @DisplayName("Should return the two persisted portfolios of the db")
+    void getAllItems() {
+
+        HttpHeaders headers = getHttpHeadersWithJWT();
+
+        //GIVE
+        PortfolioItem newPortfolioItem1 = PortfolioItem.builder()
+                .displayName("Amazon")
+                .symbol("AMZN")
+                .quantity(3)
+                .boughtAtPricePerShare(500)
+                .build();
+
+        PortfolioItem newPortfolioItem2 = PortfolioItem.builder()
+                .displayName("Microsoft")
+                .symbol("MSFT")
+                .quantity(5)
+                .boughtAtPricePerShare(100)
+                .build();
+
+        Portfolio portfolio1 = Portfolio.builder()
+                .id("1")
+                .name("Portfolio1")
+                .portfolioItems(List.of(newPortfolioItem1, newPortfolioItem2))
+                .purchaseCostsOfPortfolio(600)
+                .build();
+
+        Portfolio portfolio2 = Portfolio.builder()
+                .id("2")
+                .name("Portfolio2")
+                .portfolioItems(List.of(newPortfolioItem1, newPortfolioItem2))
+                .build();
+
+        portfolioRepo.save(portfolio1);
+        portfolioRepo.save(portfolio2);
+
+        //WHEN
+        ResponseEntity<Portfolio[]> response = restTemplate.exchange("/portfolio", HttpMethod.GET, new HttpEntity<>(headers), Portfolio[].class);
+        Portfolio[] expected = new Portfolio[]{portfolio1, portfolio2};
+        //need to update expected Portfolio:
+        for (Portfolio portfolio : expected) {
+            portfolio.setPortfolioItems(portfolioApiService.updateAll(portfolio.getPortfolioItems()));
+            portfolioService.updatePortfolio(portfolio);
+        }
+
+        //THEN
+        assertThat(response.getStatusCode(), is(HttpStatus.OK));
+        assertArrayEquals(expected, response.getBody());
+    }
 }
