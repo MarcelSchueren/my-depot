@@ -21,22 +21,22 @@ export default function NavigationBar() {
         <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
             <BottomNavigation value={value} onChange={handleChange} >
                 <BottomNavigationAction
-                    label="Depot"
+                    label="Actual"
                     value="/"
                     icon={<HomeIcon/>}
                 />
                 <BottomNavigationAction
-                    label="New Depot"
+                    label="New"
                     value="/new"
                     icon={<AddBoxIcon/>}
                 />
                 <BottomNavigationAction
-                    label="Edit Depot"
+                    label="Edit"
                     value="/edit"
                     icon={<EditIcon/>}
                 />
                 <BottomNavigationAction
-                    label="Open Depot"
+                    label="Open"
                     value="/open"
                     icon={<FolderIcon/>}/>
 
