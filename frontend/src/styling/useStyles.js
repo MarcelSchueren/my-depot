@@ -124,6 +124,13 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.default,
     },
 
+    loginContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        margin: '20px',
+        padding: '20px'
+    },
+
     footer: {
         // padding: '20px 0'
     },

@@ -1,5 +1,5 @@
 import useStyles from "../styling/useStyles";
-import {Button, TextField} from "@mui/material";
+import {Box, Button, Container, TextField} from "@mui/material";
 import {useState} from "react";
 
 const initialState = {
@@ -23,7 +23,14 @@ export default function LoginPage({login}) {
 
     return (
         <div className={classes.page}>
-            <form onSubmit={handleSubmit}>
+            <Box
+                component="form"
+                noValidate
+                autoComplete="off"
+                className={classes.loginContainer}
+                onSubmit={handleSubmit}
+            >
+
                 <TextField type="text"
                            name="username"
                            required
@@ -36,9 +43,10 @@ export default function LoginPage({login}) {
                            required
                            label="Password"
                            value={credentials.password}
+                           margin="normal"
                            onChange={handleChange}/>
-                <Button onClick={handleSubmit}>Login</Button>
-            </form>
+                <Button type="submit" variant="contained" >Login</Button>
+            </Box>
         </div>
     )
 }
