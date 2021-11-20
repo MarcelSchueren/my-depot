@@ -135,6 +135,10 @@ const useStyles = makeStyles((theme) => ({
         // padding: '20px 0'
     },
 
+    appbarElement: {
+      padding: '10px'
+    },
+
     page: {
         backgroundColor: theme.palette.background.paper,
         color: theme.palette.text.primary,
