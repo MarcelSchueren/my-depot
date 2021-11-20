@@ -13,15 +13,26 @@ import {useState} from "react";
 import Footer from "./components/Footer";
 import theme from "./styling/theme";
 import PortfolioItemDetailsPage from "./pages/PortfolioItemDetailsPage";
+import LoginPage from "./pages/LoginPage";
+import axios from "axios";
 
 function App() {
 
-    const {depots} = useDepots()
+    const [token, setToken] = useState()
+    const {depots} = useDepots(token)
     const [activeDepot, setActiveDepot] = useState()
     const [activePortfolioItem, setActivePortfolioItem] = useState({})
 
+    console.log(token)
+
     const openDepot = (depot) => setActiveDepot(depot)
     const openPortfolioItem = (portfolioItem) => setActivePortfolioItem(portfolioItem)
+
+    const login = (credentials) => {
+        axios.post("auth/login", credentials)
+            .then(response => response.data)
+            .then(setToken)
+    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -30,14 +41,17 @@ function App() {
                 <Router>
                     <Header/>
                     <Switch>
+                        <Route path="/login">
+                            <LoginPage login={login}/>
+                        </Route>
                         <Route path="/new">
-                            <NewDepotPage/>
+                            <NewDepotPage token={token}/>
                         </Route>
                         <Route path="/edit">
                             <EditDepotPage/>
                         </Route>
                         <Route path="/open">
-                            <OpenDepotPage depots={depots} openDepot={openDepot}/>
+                            <OpenDepotPage depots={depots} openDepot={openDepot} token={token}/>
                         </Route>
                         <Route path="/play">
                             <PlayPage/>
