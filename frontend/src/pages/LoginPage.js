@@ -1,13 +1,16 @@
 import useStyles from "../styling/useStyles";
-import {Box, Button, Container, TextField} from "@mui/material";
-import {useState} from "react";
+import {Box, Button, TextField} from "@mui/material";
+import {useContext, useState} from "react";
+import {AuthContext} from "../context/AuthProvider";
 
 const initialState = {
     username: "",
     password: ""
 }
 
-export default function LoginPage({login}) {
+export default function LoginPage() {
+
+    const {login} = useContext(AuthContext)
 
     const classes = useStyles()
     const [credentials, setCredentials] = useState(initialState)

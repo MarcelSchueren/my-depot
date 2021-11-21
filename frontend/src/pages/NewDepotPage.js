@@ -1,14 +1,16 @@
 import {Button, TextField, Typography} from "@mui/material";
 import useStyles from "../styling/useStyles";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {getPortfolioItem} from "../service/depot-api-service";
 import AddPortfolioItem from "../components/AddPortfolioItem";
 import {useHistory} from "react-router-dom";
 import useDepots from "../hooks/useDepots";
 import CardGrid from "../components/CardGrid";
+import {AuthContext} from "../context/AuthProvider";
 
-export default function NewDepotPage({token}) {
+export default function NewDepotPage() {
 
+    const {token} = useContext(AuthContext)
     const [portfolioName, setPortfolioName] = useState()
     const [symbol, setSymbol] = useState("")
     const [symbolIsWrong, setSymbolIsWrong] = useState(false)

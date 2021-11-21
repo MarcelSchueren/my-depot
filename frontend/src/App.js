@@ -1,7 +1,7 @@
 import './App.css';
 import Header from "./components/Header";
 import NavigationBar from "./components/NavigationBar";
-import {Route, Switch, useHistory} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import NewDepotPage from "./pages/NewDepotPage";
 import EditDepotPage from "./pages/EditDepotPage";
 import PlayPage from "./pages/PlayPage";
@@ -14,44 +14,35 @@ import Footer from "./components/Footer";
 import theme from "./styling/theme";
 import PortfolioItemDetailsPage from "./pages/PortfolioItemDetailsPage";
 import LoginPage from "./pages/LoginPage";
-import axios from "axios";
+import AuthProvider from "./context/AuthProvider";
 
 function App() {
 
-    const [token, setToken] = useState()
-    const {depots} = useDepots(token)
+    const {depots} = useDepots()
     const [activeDepot, setActiveDepot] = useState()
     const [activePortfolioItem, setActivePortfolioItem] = useState({})
 
     const openDepot = (depot) => setActiveDepot(depot)
     const openPortfolioItem = (portfolioItem) => setActivePortfolioItem(portfolioItem)
-    const history = useHistory()
-
-    const login = (credentials) => {
-        axios.post("auth/login", credentials)
-            .then(response => response.data)
-            .then(setToken)
-            .then(() => history.push('/open'))
-            .catch(error => console.log(error))
-    }
 
     return (
+        <AuthProvider>
         <ThemeProvider theme={theme}>
             <div>
                 <CssBaseline/>
                 <Header/>
                 <Switch>
                     <Route path="/login">
-                        <LoginPage login={login}/>
+                        <LoginPage />
                     </Route>
                     <Route path="/new">
-                        <NewDepotPage token={token}/>
+                        <NewDepotPage />
                     </Route>
                     <Route path="/edit">
                         <EditDepotPage/>
                     </Route>
                     <Route path="/open">
-                        <OpenDepotPage depots={depots} openDepot={openDepot} token={token}/>
+                        <OpenDepotPage depots={depots} openDepot={openDepot} />
                     </Route>
                     <Route path="/play">
                         <PlayPage/>
@@ -67,6 +58,7 @@ function App() {
                 <NavigationBar/>
             </div>
         </ThemeProvider>
+        </AuthProvider>
     );
 }
 
