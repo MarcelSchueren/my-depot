@@ -1,10 +1,8 @@
 import {AppBar,  Toolbar, Typography} from "@mui/material";
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import useStyles from "../styling/useStyles";
 
 export default function Header() {
 
-    const classes = useStyles()
 
     return (
         <header>
@@ -12,7 +10,7 @@ export default function Header() {
             <AppBar position="relative">
                 <Toolbar>
                     <AccountBalanceIcon fontSize="large"/>
-                    <Typography variant="h4" className={classes.appbarElement}>My Depot</Typography>
+                    <Typography variant="h4"> &nbsp;My Depot </Typography>
                 </Toolbar>
             </AppBar>
         </header>

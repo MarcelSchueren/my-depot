@@ -1,7 +1,7 @@
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import useStyles from "../styling/useStyles";
 
-export default function TableContainerIndiv({rows}){
+export default function TableContainerIndiv({rows, title}){
 
     const classes = useStyles()
 
@@ -10,7 +10,7 @@ export default function TableContainerIndiv({rows}){
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Account Overview</TableCell>
+                        <TableCell>{title} Overview</TableCell>
                         <TableCell align="right">Value</TableCell>
                         <TableCell align="right">Unit</TableCell>
                     </TableRow>

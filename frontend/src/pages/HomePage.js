@@ -7,7 +7,11 @@ export default function HomePage({activeDepot, openPortfolioItem}) {
     const classes = useStyles();
 
     if (!activeDepot) {
-        return <div> Please chose an active depot </div>
+        return (
+            <div className={classes.page}>
+                <Typography variant="h5">Please chose an active depot</Typography>
+            </div>
+        )
     }
 
     return (

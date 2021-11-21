@@ -8,9 +8,14 @@ export default function OpenDepotPage({openDepot, token}) {
     const classes = useStyles();
     const {depots} = useDepots(token)
 
-    if (depots.length===0) {
-        return <div> No active depots. Create one with "new Depot".</div>
+    if (depots.length === 0) {
+        return (
+            <div className={classes.page}>
+                <Typography variant="h5">Loading...</Typography>
+            </div>
+        )
     }
+
 
     return (
         <div className={classes.page}>

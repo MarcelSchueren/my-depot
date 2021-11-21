@@ -132,7 +132,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     footer: {
-        // padding: '20px 0'
+        padding: '20px 0'
     },
 
     appbarElement: {
