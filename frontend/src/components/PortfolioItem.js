@@ -27,11 +27,10 @@ export default function PortfolioItem({stock, openPortfolioItem, short}) {
             </Typography>
             <Typography className={classes.cardDisplayName}>{stock.displayName}</Typography>
             <Typography className={classes.cardQuantity}>{stock.quantity} pcs.
-                á {(stock.regularMarketPrice).toFixed(2)} € </Typography>
+                á {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(stock.regularMarketPrice)} </Typography>
             <Typography variant="h6"
                         className={classes.cardSum}>
-                {(stock.quantity * stock.regularMarketPrice).toFixed(2)}
-                €
+                {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(stock.quantity * stock.regularMarketPrice)}
             </Typography>
 
             {short? <Typography

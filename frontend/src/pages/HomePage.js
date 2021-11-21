@@ -17,9 +17,11 @@ export default function HomePage({activeDepot, openPortfolioItem}) {
     return (
         <div className={classes.page}>
             <Typography variant="h4" gutterBottom>{activeDepot.name}</Typography>
-            <Typography variant="h5" gutterBottom>{activeDepot.valueOfPortfolio.toFixed(2)} € </Typography>
+            <Typography variant="h5" gutterBottom>
+                {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(activeDepot.valueOfPortfolio)}
+                </Typography>
             <Typography variant="h7">
-                since purchase: {activeDepot.arithmeticalGain.toFixed(2)} €
+                since purchase: {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(activeDepot.arithmeticalGain)}
                 ({
                 (activeDepot.arithmeticalGain / activeDepot.purchaseCostsOfPortfolio * 100).toFixed(2)
             }%)

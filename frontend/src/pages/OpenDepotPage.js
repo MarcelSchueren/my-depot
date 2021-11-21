@@ -16,7 +16,6 @@ export default function OpenDepotPage({openDepot, token}) {
         )
     }
 
-
     return (
         <div className={classes.page}>
             <Typography variant="h4" gutterBottom>Chose a depot</Typography>

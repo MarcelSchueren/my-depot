@@ -50,7 +50,8 @@ export default function AddPortfolioItem({
     return (
         <section className={classes.addPortfolioItem}>
             <Typography>Found: {activePortfolioItem.displayName}</Typography>
-            <Typography>Price: {activePortfolioItem.regularMarketPrice.toFixed(2)} € / piece</Typography>
+            <Typography>Price: {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(activePortfolioItem.regularMarketPrice)}
+                / piece</Typography>
             <TextField
                 id="filled-number"
                 label="Number of pieces"
