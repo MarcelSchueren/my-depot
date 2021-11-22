@@ -26,7 +26,6 @@ function App() {
 
     return (
         <ThemeProvider theme={theme}>
-            <div>
                 <CssBaseline/>
                 <Header/>
                 <Switch>
@@ -54,7 +53,6 @@ function App() {
                 </Switch>
                 <Footer/>
                 <NavigationBar/>
-            </div>
         </ThemeProvider>
     );
 }

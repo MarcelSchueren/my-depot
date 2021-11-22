@@ -31,7 +31,7 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(YahooApiException.class)
-    public ResponseEntity<ApiError> handleYahooApiException(NoSuchElementException ex) {
+    public ResponseEntity<ApiError> handleYahooApiException(YahooApiException ex) {
         log.error("Problems reading from extern Yahoo-Finance-API ", ex);
         ApiError apiError = new ApiError("Problems reading from extern Yahoo-Finance-API ", ex.getMessage());
         return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);

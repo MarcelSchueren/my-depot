@@ -132,14 +132,24 @@ const useStyles = makeStyles((theme) => ({
     },
 
     footer: {
-        padding: '20px 0'
+        height: '100%',
+        padding: '20px 0',
+        backgroundColor: theme.palette.background.paper,
+        // position: 'fixed',
+        // left: '0px',
+        // bottom: '0px'
     },
 
     appbarElement: {
       padding: '10px'
     },
 
+    bottomNavigation: {
+      backgroundColor: theme.palette.background.default
+    },
+
     page: {
+        length: '100%',
         backgroundColor: theme.palette.background.paper,
         color: theme.palette.text.primary,
         padding: '20px',

@@ -7,7 +7,7 @@ export default function Header() {
     return (
         <header>
             <meta name="viewport" content="initial-scale=1, width=device-width"/>
-            <AppBar position="relative">
+            <AppBar position="relative" >
                 <Toolbar>
                     <AccountBalanceIcon fontSize="large"/>
                     <Typography variant="h4" sx={{pl:1}}> My Depot </Typography>

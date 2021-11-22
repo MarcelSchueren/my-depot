@@ -10,7 +10,7 @@ export default function HomePage({activeDepot, openPortfolioItem}) {
     if (!activeDepot) {
         return (
             <div className={classes.page}>
-                <Typography variant="h5">Please chose an active depot</Typography>
+                <Typography variant="h5">Please choose an active depot</Typography>
             </div>
         )
     }
