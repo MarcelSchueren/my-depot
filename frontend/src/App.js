@@ -14,7 +14,6 @@ import Footer from "./components/Footer";
 import theme from "./styling/theme";
 import PortfolioItemDetailsPage from "./pages/PortfolioItemDetailsPage";
 import LoginPage from "./pages/LoginPage";
-import AuthProvider from "./context/AuthProvider";
 
 function App() {
 
@@ -26,7 +25,6 @@ function App() {
     const openPortfolioItem = (portfolioItem) => setActivePortfolioItem(portfolioItem)
 
     return (
-        <AuthProvider>
         <ThemeProvider theme={theme}>
             <div>
                 <CssBaseline/>
@@ -58,7 +56,6 @@ function App() {
                 <NavigationBar/>
             </div>
         </ThemeProvider>
-        </AuthProvider>
     );
 }
 
