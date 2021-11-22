@@ -11,20 +11,24 @@ export default function useDepots() {
     const addDepot = (newDepot) => {
         return addPortfolio(newDepot, token)
             .then(responseDepot => setDepots([...depots, responseDepot]))
-            .catch(error => {console.error(error.message)})
+            .catch(error => {
+                console.error(error.message)
+            })
     }
 
-        useEffect(() => {
-            // let isMounted = true;
-            if (token!== undefined) {
+    useEffect(() => {
+        // let isMounted = true;
+        if (token !== undefined) {
             getDepots(token)
-                .then(result => { setDepots(result)})           //if(isMounted)
+                .then(result => {
+                    setDepots(result)
+                })           //if(isMounted)
                 .catch(error => console.error(error.message))
             //return () => { isMounted = false };
         } else {
-                history.push('/login')
-            }
-            }, [token, history])
+            history.push('/login')
+        }
+    }, [token, history])
 
     return {depots, addDepot}
 }

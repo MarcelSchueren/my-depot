@@ -10,7 +10,7 @@ export default function Header() {
             <AppBar position="relative">
                 <Toolbar>
                     <AccountBalanceIcon fontSize="large"/>
-                    <Typography variant="h4"> &nbsp;My Depot </Typography>
+                    <Typography variant="h4" sx={{pl:1}}> My Depot </Typography>
                 </Toolbar>
             </AppBar>
         </header>

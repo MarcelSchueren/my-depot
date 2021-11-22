@@ -15,27 +15,29 @@ export default function HomePage({activeDepot, openPortfolioItem}) {
         )
     }
 
+    const {name, valueOfPortfolio, arithmeticalGain, purchaseCostsOfPortfolio, portfolioItems} = activeDepot;
+
     return (
         <div className={classes.page}>
-            <Typography variant="h4" gutterBottom>{activeDepot.name}</Typography>
+            <Typography variant="h4" gutterBottom>{name}</Typography>
             <Typography variant="h5" gutterBottom>
-                {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(activeDepot.valueOfPortfolio)}
-                </Typography>
+                {new Intl.NumberFormat('de-DE', {style: 'currency', currency: 'EUR'}).format(valueOfPortfolio)}
+            </Typography>
             <Typography variant="h7">
                 since purchase:&nbsp;
                 {activeDepot.arithmeticalGain > 0 && '+'}
-                {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(activeDepot.arithmeticalGain)}
+                {new Intl.NumberFormat('de-DE', {style: 'currency', currency: 'EUR'}).format(arithmeticalGain)}
                 &nbsp;(
             </Typography>
-            <Typography variant="h7" color={activeDepot.arithmeticalGain < 0 ? theme.palette.error.light : "lightgreen"} >
-                {activeDepot.arithmeticalGain > 0 && '+'}
-                {(activeDepot.arithmeticalGain / activeDepot.purchaseCostsOfPortfolio * 100).toFixed(2)}
+            <Typography variant="h7" color={arithmeticalGain < 0 ? theme.palette.error.light : "lightgreen"}>
+                {arithmeticalGain > 0 && '+'}
+                {(arithmeticalGain / purchaseCostsOfPortfolio * 100).toFixed(2)}
                 %
             </Typography>
             <Typography variant="h7">
                 )
             </Typography>
-            <CardGrid portfolioItems={activeDepot.portfolioItems} openPortfolioItem={openPortfolioItem} text={""}/>
+            <CardGrid portfolioItems={portfolioItems} openPortfolioItem={openPortfolioItem} text={""}/>
         </div>
     )
 }
