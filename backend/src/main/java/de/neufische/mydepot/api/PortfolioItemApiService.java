@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import yahoofinance.Stock;
 
 import java.math.BigDecimal;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @Log4j2
@@ -22,6 +23,11 @@ public class PortfolioItemApiService {
 
     public PortfolioItem getPortfolioItemBySymbol(String symbol) {
         Stock portfolioItemBySymbol = yahooFinanceService.getPortfolioItemBySymbol(symbol);
+
+        if (portfolioItemBySymbol==null){
+            throw new NoSuchElementException("Symbol is not valid: " + symbol);
+        }
+
         return PortfolioItem.builder()
                 .id(generateUUID())
                 .symbol(symbol)

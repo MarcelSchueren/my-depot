@@ -29,7 +29,7 @@ public class YahooFinanceService {
         try {
             return YahooFinance.get(symbols);
         } catch (IOException e) {
-            log.error("Ausleseproblem...Error in YahooFinanceService: get");
+            log.error("Error in YahooFinanceService: get", e);
             throw new YahooApiException("Probleme reading the data from YahooFinance with symbols: " + Arrays.toString(symbols), e);
         }
     }
@@ -38,7 +38,7 @@ public class YahooFinanceService {
         try {
             return YahooFinance.get(symbol);
         } catch (IOException e) {
-            log.error("Ausleseproblem...Error in YahooFinanceService: get");
+            log.error("Error in YahooFinanceService: get", e);
             throw new YahooApiException("Probleme reading the data from YahooFinance with symbol: " + symbol , e);
         }
     }
