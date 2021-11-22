@@ -27,11 +27,15 @@ public class PortfolioService {
         List<Portfolio> all = portfolioRepo.findAll();
         for (Portfolio p : all) {
             p.setPortfolioItems(portfolioApiService.updateAll(p.getPortfolioItems()));
-            p.setValueOfPortfolio(BigDecimal.valueOf(calculateValueOfPortfolio(p)));
-            p.setPurchaseCostsOfPortfolio(calculatePurchaseCostsOfPortfolio(p));
-            p.setArithmeticalGain(p.getValueOfPortfolio().doubleValue() - p.getPurchaseCostsOfPortfolio());
+            updatePortfolio(p);
         }
         return all;
+    }
+
+    public void updatePortfolio(Portfolio p) {
+        p.setValueOfPortfolio(BigDecimal.valueOf(calculateValueOfPortfolio(p)));
+        p.setPurchaseCostsOfPortfolio(calculatePurchaseCostsOfPortfolio(p));
+        p.setArithmeticalGain(p.getValueOfPortfolio().doubleValue() - p.getPurchaseCostsOfPortfolio());
     }
 
     private double calculatePurchaseCostsOfPortfolio(Portfolio p) {

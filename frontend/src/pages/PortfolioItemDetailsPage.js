@@ -29,12 +29,9 @@ export default function PortfolioItemDetailsPage({activePortfolioItem}) {
         <div className={classes.page}>
             <PortfolioItem stock={activePortfolioItem} openPortfolioItem={()=>{}} short={true}/>
             <p> </p>
-
-            <TableContainerIndiv rows={rowsOverview}/>
-
+            <TableContainerIndiv rows={rowsOverview} title="Depot"/>
             <p> </p>
-
-            <TableContainerIndiv rows={rowsDetail}/>
+            <TableContainerIndiv rows={rowsDetail} title="Market"/>
         </div>
     )
 }

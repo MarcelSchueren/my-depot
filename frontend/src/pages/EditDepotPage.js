@@ -7,8 +7,8 @@ export default function EditDepotPage(){
 
     return(
         <div className={classes.page}>
-            <Typography variant="h3" gutterBottom>EditDepotPage</Typography>
-            <Typography variant="h5">Feature coming soon :)</Typography>
+            <Typography variant="h3" gutterBottom>Edit Depot</Typography>
+            <Typography variant="h5">Feature coming soon</Typography>
         </div>
     )
 }

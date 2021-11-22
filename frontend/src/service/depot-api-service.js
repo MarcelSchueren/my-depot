@@ -1,17 +1,25 @@
 import axios from 'axios'
 
-export const getDepots = () => {
-    return axios.get('/portfolio')
+const getHeader = (token) => {
+    return {
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+    }
+}
+
+export const getDepots = (token) => {
+    return axios.get('/portfolio', getHeader(token))
         .then(response => response.data)
 }
 
-export const getPortfolioItem = (symbol) => {
-    return axios.get(`/portfolioItem/${symbol}`)
+export const getPortfolioItem = (symbol, token) => {
+    return axios.get(`/portfolioItem/${symbol}`, getHeader(token))
         .then(response => response.data)
 }
 
-export const addPortfolio = (newPortfolio) => {
-    return axios.post('/portfolio', newPortfolio)
+export const addPortfolio = (newPortfolio, token) => {
+    return axios.post('/portfolio', newPortfolio, getHeader(token))
         .then(response => response.data)
 }
 

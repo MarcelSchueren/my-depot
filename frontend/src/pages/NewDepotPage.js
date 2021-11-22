@@ -7,7 +7,7 @@ import {useHistory} from "react-router-dom";
 import useDepots from "../hooks/useDepots";
 import CardGrid from "../components/CardGrid";
 
-export default function NewDepotPage() {
+export default function NewDepotPage({token}) {
 
     const [portfolioName, setPortfolioName] = useState()
     const [symbol, setSymbol] = useState("")
@@ -16,7 +16,7 @@ export default function NewDepotPage() {
     const [portfolioItems, setPortfolioItems] = useState([])
     const [noNameYet, setNoNameYet] = useState(false)
     const history = useHistory()
-    const {addDepot} = useDepots()
+    const {addDepot} = useDepots(token)
 
     const classes = useStyles()
 
@@ -31,7 +31,7 @@ export default function NewDepotPage() {
         if (symbol === "") {
             return
         }
-        getPortfolioItem(symbol)
+        getPortfolioItem(symbol, token)
             .catch(() => {
                 setSymbolIsWrong(true)
             })
