@@ -2,9 +2,12 @@ import {Container, Grid, Typography} from "@mui/material";
 import Portfolio from "../components/Portfolio";
 import useStyles from "../styling/useStyles";
 import useDepots from "../hooks/useDepots";
+import {useContext} from "react";
+import {AuthContext} from "../context/AuthProvider";
 
-export default function OpenDepotPage({openDepot, token}) {
+export default function OpenDepotPage({openDepot}) {
 
+    const {token} = useContext(AuthContext)
     const classes = useStyles();
     const {depots} = useDepots(token)
 

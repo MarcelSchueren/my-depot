@@ -1,11 +1,12 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {addPortfolio, getDepots} from "../service/depot-api-service";
 import {useHistory} from "react-router-dom";
+import {AuthContext} from "../context/AuthProvider";
 
-export default function useDepots(token) {
+export default function useDepots() {
     const [depots, setDepots] = useState([])
     const history = useHistory()
-
+    const {token} = useContext(AuthContext)
 
     const addDepot = (newDepot) => {
         return addPortfolio(newDepot, token)
