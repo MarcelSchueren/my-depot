@@ -8,7 +8,7 @@ export default function PortfolioItem({stock, openPortfolioItem, short}) {
     const classes = useStyles()
     const history = useHistory()
 
-    const absoluteChange = (-1)*(stock.quantity * stock.boughtAtPricePerShare
+    const absoluteChange = (-1) * (stock.quantity * stock.boughtAtPricePerShare
         - stock.quantity * stock.regularMarketPrice)
     const percentageChange = absoluteChange
         / (stock.quantity * stock.boughtAtPricePerShare)
@@ -27,25 +27,35 @@ export default function PortfolioItem({stock, openPortfolioItem, short}) {
             </Typography>
             <Typography className={classes.cardDisplayName}>{stock.displayName}</Typography>
             <Typography className={classes.cardQuantity}>{stock.quantity} pcs.
-                á {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(stock.regularMarketPrice)} </Typography>
+                á {new Intl.NumberFormat('de-DE', {
+                    style: 'currency',
+                    currency: 'EUR'
+                }).format(stock.regularMarketPrice)} </Typography>
             <Typography variant="h6"
                         className={classes.cardSum}>
-                {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(stock.quantity * stock.regularMarketPrice)}
+                {new Intl.NumberFormat('de-DE', {
+                    style: 'currency',
+                    currency: 'EUR'
+                }).format(stock.quantity * stock.regularMarketPrice)}
             </Typography>
 
-            {short? <Typography
+            {short ? <Typography
                     align="right"
                     margin="10px"
                     color={color}>
                     {absoluteChange.toFixed(2)}
                     €
-            </Typography> :
-            <Button size="small"
-                    onClick={() => {
-                        openPortfolioItem(stock)
-                        history.push(`/details/${stock.id}`)
-                    }}>More
-            </Button>}
+                </Typography> :
+                <div className={classes.cardPortfolioItemButtonBox}>
+                    <Button
+                        variant="contained"
+                        size="small"
+                        onClick={() => {
+                            openPortfolioItem(stock)
+                            history.push(`/details/${stock.id}`)
+                        }}>More
+                    </Button>
+                </div>}
         </Card>
     )
 }

@@ -34,7 +34,9 @@ export default function Portfolio({depot, openDepot}) {
 
                 {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(absoluteGain)}
             </Typography>
-            <Button className={classes.cardPortfolioButton} size="small" onClick={handleClick}>Open</Button>
+            <div className={classes.cardPortfolioButtonBox}>
+            <Button variant="contained" size="small" onClick={handleClick} className={classes.cardPortfolioButton}>Open</Button>
+            </div>
         </Card>
     )
 }

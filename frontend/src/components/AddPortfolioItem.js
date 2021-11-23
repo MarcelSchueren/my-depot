@@ -78,7 +78,7 @@ export default function AddPortfolioItem({
                         label="Amount"
                     />
                 </FormControl>}
-            <Button variant="outlined" onClick={addPortfolioItem}>Add</Button>
+            <Button variant="contained" onClick={addPortfolioItem}>Add</Button>
         </section>
     )
 }

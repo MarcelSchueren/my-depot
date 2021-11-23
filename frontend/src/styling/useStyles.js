@@ -81,12 +81,30 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'right'
     },
 
-    cardPortfolioButton: {
+    cardPortfolioButtonBox: {
         gridColumnStart: '2',
         gridColumnEnd: '3',
         gridRowStart: '3',
         gridRowEnd: '4',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
     },
+
+    cardPortfolioButton: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignSelf: "center",
+    },
+
+    cardPortfolioItemButtonBox: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignSelf: "center",
+    },
+
 
     cardPortfolioPercentageChange: {
         backgroundColor: theme.palette.primary.light,
