@@ -88,7 +88,7 @@ export default function NewDepotPage() {
                            autoComplete='off'
                            error={symbolIsWrong}
                            onChange={event => setSymbol(event.target.value)}/>
-                <Button margin="normal" variant="contained" onClick={handleSymbolSubmit}>Search</Button>
+                <Button margin="normal" className={classes.cardPortfolioItemButton} variant="contained" onClick={handleSymbolSubmit}>Search</Button>
             </form>
 
             <AddPortfolioItem

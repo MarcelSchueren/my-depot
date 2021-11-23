@@ -96,15 +96,20 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'row',
         justifyContent: 'center',
         alignSelf: "center",
+        backgroundColor: theme.palette.primary.light,
     },
 
     cardPortfolioItemButtonBox: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'right',
         alignSelf: "center",
+        paddingRight: '9px',
     },
 
+    cardPortfolioItemButton: {
+        backgroundColor: theme.palette.primary.light,
+    },
 
     cardPortfolioPercentageChange: {
         backgroundColor: theme.palette.primary.light,

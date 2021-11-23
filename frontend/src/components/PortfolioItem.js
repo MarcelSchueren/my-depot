@@ -48,6 +48,7 @@ export default function PortfolioItem({stock, openPortfolioItem, short}) {
                 </Typography> :
                 <div className={classes.cardPortfolioItemButtonBox}>
                     <Button
+                        className={classes.cardPortfolioItemButton}
                         variant="contained"
                         size="small"
                         onClick={() => {
